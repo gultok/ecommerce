@@ -1,5 +1,4 @@
-﻿using ECommerce.Commands;
-using System;
+﻿using System;
 
 namespace ECommerce
 {
@@ -16,17 +15,15 @@ namespace ECommerce
                     {
                         foreach (var line in ScenarioFileReader.Lines(scenario))
                         {
-                            ICommand command = CommandConverter.GetCommand(line);
-                            command.Validate();
-                            command.Run();
+                            Global.ValidateAndRunCommand(line);
                         }
                     }
                     catch (Exception exp)
                     {
-                        Console.WriteLine($"There was an error while scenario (\"{scenario}\") working {exp.Message}") ;
+                        Console.WriteLine($"There was an error while scenario (\"{scenario}\") working {exp.Message}");
                     }
                     Console.WriteLine($"{scenario} is ended");
-                    // reset data & time
+                    Global.ResetSystemDataAndTime();
                 }
                 Console.ReadKey();
             }

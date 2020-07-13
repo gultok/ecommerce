@@ -1,4 +1,6 @@
 ﻿using ECommerce.Commands;
+using ECommerce.ParameterObjects;
+using ECommerce.Requests;
 using System;
 using System.Linq;
 
@@ -12,20 +14,29 @@ namespace ECom.Commands
         }
         public string _commandStr { get; set; }
 
-        public void Run()
+        public async void Run()
         {
             var commandName = _commandStr.Split(' ')[0];
             var firstParameter = _commandStr.Split(' ')[1];
-            //if (commandName.ToLower().Contains("get"))
-            //    new CommandRunner().GetCampaignInfo(firstParameter);
-            //if (commandName.ToLower().Contains("create"))
-            //{
-            //    var _2ndParam = _commandStr.Split(' ')[2];
-            //    var _3rdParam = Convert.ToInt32(_commandStr.Split(' ')[3]);
-            //    var _4thParam = Convert.ToDouble(_commandStr.Split(' ')[4]);
-            //    var _5thParam = Convert.ToDouble(_commandStr.Split(' ')[5]);
-            //    new CommandRunner().CreateCampaign(firstParameter, _2ndParam, _3rdParam, _4thParam, _5thParam);
-            //}
+            string resultMsg = "";
+            if (commandName.ToLower().Contains("get"))
+                resultMsg = await CampaignRequests.GetCampaignInfo(firstParameter);
+            if (commandName.ToLower().Contains("create"))
+            {
+                var _2ndParam = _commandStr.Split(' ')[2];
+                var _3rdParam = Convert.ToInt32(_commandStr.Split(' ')[3]);
+                var _4thParam = Convert.ToDouble(_commandStr.Split(' ')[4]);
+                var _5thParam = Convert.ToDouble(_commandStr.Split(' ')[5]);
+                resultMsg = await CampaignRequests.CreateCampaign(new CampaignParam
+                {
+                    name = firstParameter,
+                    productCode = _2ndParam,
+                    duration = _3rdParam,
+                    limit = _4thParam,
+                    targetSalesCount = _5thParam
+                });
+            }
+            Console.WriteLine(resultMsg);
         }
 
         public void Validate()

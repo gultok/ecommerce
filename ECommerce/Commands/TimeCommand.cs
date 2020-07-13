@@ -1,4 +1,5 @@
 ﻿using ECommerce.Commands;
+using ECommerce.Requests;
 using System;
 using System.Linq;
 
@@ -12,12 +13,14 @@ namespace ECom.Commands
         }
         public string _commandStr { get; set; }
 
-        public void Run()
+        public async void Run()
         {
             var commandName = _commandStr.Split(' ')[0];
             var firstParameter = Convert.ToInt16(_commandStr.Split(' ')[1]);
-            //if (commandName.ToLower().Contains("increase"))
-            //    new CommandRunner().IncreaseTime(firstParameter);           
+            string resultMsg = "";
+            if (commandName.ToLower().Contains("increase"))
+                resultMsg = await TimeRequests.IncreaseTime(firstParameter);
+            Console.WriteLine(resultMsg);
         }
 
         public void Validate()
