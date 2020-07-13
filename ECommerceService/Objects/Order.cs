@@ -13,7 +13,8 @@ namespace ECommerceService
             Product product;
             Product.GetProductInfo(productCode, out product);
             //product not found?? 
-
+            if (product == null)
+                return $"Product not found {productCode}";
             //order stock control
             if (product.Stock < quantity)
             {

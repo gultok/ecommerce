@@ -1,25 +1,20 @@
-﻿using ECommerce.Commands;
-using ECommerce.Requests;
-using System;
+﻿using System;
 using System.Linq;
 
-namespace ECom.Commands
+namespace ECommerce.Commands.ProductCommands
 {
-    public class TimeCommand : ICommand
+    public class GetProductInfo : ICommand
     {
-        public TimeCommand(string commandStr)
+        public string _commandStr { get; set; }
+        public GetProductInfo(string commandStr)
         {
             _commandStr = commandStr;
         }
-        public string _commandStr { get; set; }
 
         public async void Run()
         {
-            var commandName = _commandStr.Split(' ')[0];
-            var firstParameter = Convert.ToInt16(_commandStr.Split(' ')[1]);
-            string resultMsg = "";
-            if (commandName.ToLower().Contains("increase"))
-                resultMsg = await TimeRequests.IncreaseTime(firstParameter);
+            var firstParameter = _commandStr.Split(' ')[1];
+            string resultMsg = await ProductRequests.GetProductAsync(firstParameter);
             Console.WriteLine(resultMsg);
         }
 
@@ -33,9 +28,6 @@ namespace ECom.Commands
             but it is not sufficient becasue command may not has parameter*/
             if (commandAry.Count() < 2)
                 throw new Exception("Should be least 1 parameter");
-            int hours;
-            if (!Int32.TryParse(commandAry[1], out hours))
-                throw new Exception("Second parameter must be an int");
         }
     }
 }
