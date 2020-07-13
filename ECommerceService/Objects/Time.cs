@@ -10,9 +10,10 @@ namespace ECommerceService
             CurrentTime = new TimeSpan(CurrentTime.Hours + hours, 0, 0);
             return $"Time is {CurrentTime}";
         }
-        public static void ResetTime()
+        public static string ResetTime()
         {
             CurrentTime = new TimeSpan(0, 0, 0);
+            return $"Time is {CurrentTime}";
         }
         // aynı anda birden fazla kez çağrılırsa zaman üst üste arttırılmış olcak, kontrol nasıl?
     }
