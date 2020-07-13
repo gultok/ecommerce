@@ -1,6 +1,5 @@
 C:\Users\GULBENTOKALAK\source\repos\ECommerce\ECommerce\obj\Debug\netcoreapp3.1\ECommerce.AssemblyInfoInputs.cache
 C:\Users\GULBENTOKALAK\source\repos\ECommerce\ECommerce\obj\Debug\netcoreapp3.1\ECommerce.AssemblyInfo.cs
-C:\Users\GULBENTOKALAK\source\repos\ECommerce\ECommerce\obj\Debug\netcoreapp3.1\ECommerce.csproj.CoreCompileInputs.cache
 C:\Users\GULBENTOKALAK\source\repos\ECommerce\ECommerce\bin\Debug\netcoreapp3.1\ECommerce.exe
 C:\Users\GULBENTOKALAK\source\repos\ECommerce\ECommerce\bin\Debug\netcoreapp3.1\ECommerce.deps.json
 C:\Users\GULBENTOKALAK\source\repos\ECommerce\ECommerce\bin\Debug\netcoreapp3.1\ECommerce.runtimeconfig.json
@@ -10,3 +9,4 @@ C:\Users\GULBENTOKALAK\source\repos\ECommerce\ECommerce\bin\Debug\netcoreapp3.1\
 C:\Users\GULBENTOKALAK\source\repos\ECommerce\ECommerce\obj\Debug\netcoreapp3.1\ECommerce.dll
 C:\Users\GULBENTOKALAK\source\repos\ECommerce\ECommerce\obj\Debug\netcoreapp3.1\ECommerce.pdb
 C:\Users\GULBENTOKALAK\source\repos\ECommerce\ECommerce\obj\Debug\netcoreapp3.1\ECommerce.genruntimeconfig.cache
+C:\Users\GULBENTOKALAK\source\repos\ECommerce\ECommerce\obj\Debug\netcoreapp3.1\ECommerce.csprojAssemblyReference.cache
