@@ -16,7 +16,7 @@ namespace ECommerceService
         }
         public string Code { get; set; }
         public double? Stock { get; set; }
-        public double? Price { get; set; }   
+        public double? Price { get; set; }
         public double? CampaignPrice { get; set; }
         public static string CreateProduct(string productCode, double price, double stock)
         {
@@ -29,10 +29,10 @@ namespace ECommerceService
         }
         public static string GetProductInfo(string productCode, out Product product)
         {
-            product = Pool.Products.FirstOrDefault(p => p.Code.ToLower() == productCode.ToLower());            
-            productCode = product.Code;
+            product = Pool.Products.FirstOrDefault(p => p.Code.ToLower() == productCode.ToLower());
             if (product != null)
             {
+                productCode = product.Code;
                 //check campaigns
                 List<Campaign> productCampaigns = Pool.Campaigns.Where(c => c.ProductCode.ToLower() == productCode.ToLower() && c.Status == E_CampaignStatus.Active).ToList();
                 if (productCampaigns.Count != 0)
