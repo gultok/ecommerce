@@ -16,7 +16,7 @@ namespace ECommerceApi.Controllers
             return Ok(message);
         }
         [HttpGet("/product/getProductInfo/{productCode}")]
-        public IActionResult GetProductInfo([FromBody] string productCode)
+        public IActionResult GetProductInfo(string productCode)
         {
             Product product;
             var message = Product.GetProductInfo(productCode, out product);

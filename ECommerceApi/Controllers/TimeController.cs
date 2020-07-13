@@ -8,7 +8,7 @@ namespace ECommerceApi.Controllers
     public class TimeController : ControllerBase
     {
         [HttpPut("/time/increaseTime/{hours}")]
-        public IActionResult IncreaseTime([FromBody] int hours)
+        public IActionResult IncreaseTime(int hours)
         {
             var message = Time.IncreaseTime(hours);
             return Ok(message);
@@ -16,8 +16,8 @@ namespace ECommerceApi.Controllers
         [HttpGet("/time/resetTime")]
         public IActionResult ResetTime()
         {
-            Time.ResetTime();
-            return Ok();
+            var message = Time.ResetTime();
+            return Ok(message);
         }
     }
 }

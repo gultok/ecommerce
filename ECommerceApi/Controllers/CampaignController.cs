@@ -15,10 +15,10 @@ namespace ECommerceApi.Controllers
             return Ok(message);
         }
         [HttpGet("/campaign/getCampaignInfo/{campaignName}")]
-        public IActionResult GetCampaignInfo([FromQuery] string campaignName)
+        public IActionResult GetCampaignInfo(string campaignName)
         {
             var message = Campaign.GetCampaignInfo(campaignName);
-            return Ok();
+            return Ok(message);
         }
     }
 }
