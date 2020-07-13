@@ -6,7 +6,7 @@ namespace ECommerce
 {
     public static class ScenarioFileReader
     {
-        private static string CurrentDirectory = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
+        private static string CurrentDirectory = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())));
         public static string[] ScenarioFiles = Directory.GetFiles(CurrentDirectory).Where(x => x.EndsWith(".txt") && x.ToLower().Contains("scenario")).ToArray();
         public static string[] Lines(string path)
         {

@@ -1,5 +1,6 @@
-﻿using ECom.Commands;
+﻿using ECommerce;
 using ECommerce.Commands;
+using ECommerce.ParameterObjects;
 using System;
 using System.Linq;
 
@@ -13,18 +14,25 @@ namespace ECom
         }
         public string _commandStr { get; set; }
 
-        public void Run()
+        public async void Run()
         {
             var commandName = _commandStr.Split(' ')[0];
             var firstParameter = _commandStr.Split(' ')[1];
-            //if (commandName.ToLower().Contains("get"))
-            //    new CommandRunner().GetProductInfo(firstParameter);
-            //if (commandName.ToLower().Contains("create"))
-            //{
-            //    var secondParam = Convert.ToDouble(_commandStr.Split(' ')[2]);
-            //    var thirdParam = Convert.ToDouble(_commandStr.Split(' ')[3]);
-            //    new CommandRunner().CreateProduct(firstParameter, secondParam, thirdParam);
-            //}
+            string resultMsg = "";
+            if (commandName.ToLower().Contains("get"))
+                resultMsg = await ProductRequests.GetProductAsync(firstParameter);
+            if (commandName.ToLower().Contains("create"))
+            {
+                var secondParam = Convert.ToDouble(_commandStr.Split(' ')[2]);
+                var thirdParam = Convert.ToDouble(_commandStr.Split(' ')[3]);
+                resultMsg = await ProductRequests.CreateProductAsync(new ProductParam
+                {
+                    productcode = firstParameter,
+                    price = secondParam,
+                    stock = thirdParam
+                });
+            }
+            Console.WriteLine(resultMsg);
         }
 
         public void Validate()

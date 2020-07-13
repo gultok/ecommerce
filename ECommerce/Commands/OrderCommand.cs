@@ -1,4 +1,6 @@
 ﻿using ECommerce.Commands;
+using ECommerce.ParameterObjects;
+using ECommerce.Requests;
 using System;
 using System.Linq;
 
@@ -12,15 +14,21 @@ namespace ECom.Commands
         }
         public string _commandStr { get; set; }
 
-        public void Run()
+        public async void Run()
         {
             var commandName = _commandStr.Split(' ')[0];
             var firstParameter = _commandStr.Split(' ')[1];
             var secondParameter = Convert.ToDouble(_commandStr.Split(' ')[2]);
+            string resultMsg = "";
             if (commandName.ToLower().Contains("create"))
             {
-                //new CommandRunner().CreateOrder(firstParameter, secondParameter);
+                resultMsg = await OrderRequests.CreateOrder(new OrderParam
+                {
+                    productCode = firstParameter,
+                    quantity = secondParameter
+                });
             }
+            Console.WriteLine(resultMsg);
         }
 
         public void Validate()
