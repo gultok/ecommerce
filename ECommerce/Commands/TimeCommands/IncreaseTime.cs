@@ -11,15 +11,15 @@ namespace ECommerce.Commands.CommonCommands
         {
             _commandStr = commandStr;
         }
-        public async void Run()
+        public void Run()
         {
             int hours = Convert.ToInt16(_commandStr.Split(' ')[1]);
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.PutAsync(Global.ActionUrl($"/time/increaseTime/{hours}"), null);
+            HttpResponseMessage response = client.PutAsync(Global.ActionUrl($"/time/increaseTime/{hours}"), null).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)
             {
-                resultMessage = await response.Content.ReadAsStringAsync();
+                resultMessage = response.Content.ReadAsStringAsync().Result;
             }
             Console.WriteLine(resultMessage);
         }

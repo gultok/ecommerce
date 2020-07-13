@@ -12,20 +12,20 @@ namespace ECommerce.Commands.OrderCommands
         {
             _commandStr = commandStr;
         }
-        public async void Run()
+        public void Run()
         {
             var productCode = _commandStr.Split(' ')[1];
             var quantity = Convert.ToDouble(_commandStr.Split(' ')[2]);
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.PostAsJsonAsync(Global.ActionUrl($"/order/createOrder"), new OrderParam
+            HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/order/createOrder"), new OrderParam
             {
                 productCode = productCode,
                 quantity = quantity
-            });
+            }).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)
             {
-                resultMessage = await response.Content.ReadAsStringAsync();
+                resultMessage = response.Content.ReadAsStringAsync().Result;
             }
             Console.WriteLine(resultMessage);
         }

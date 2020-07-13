@@ -1,29 +1,28 @@
 ﻿using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace ECommerce.Requests
 {
     public class SystemRequest
     {
-        public static async Task<string> ResetSystemData()
+        public static string ResetSystemData()
         {
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(Global.ActionUrl($"/system/resetData"));
+            HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/system/resetData")).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)
             {
-                resultMessage = await response.Content.ReadAsStringAsync();
+                resultMessage = response.Content.ReadAsStringAsync().Result;
             }
             return resultMessage;
         }
-        public static async Task<string> ResetTime()
+        public static string ResetTime()
         {
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(Global.ActionUrl($"/time/resetTime"));
+            HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/time/resetTime")).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)
             {
-                resultMessage = await response.Content.ReadAsStringAsync();
+                resultMessage = response.Content.ReadAsStringAsync().Result;
             }
             return resultMessage;
         }

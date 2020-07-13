@@ -12,15 +12,15 @@ namespace ECommerce.Commands.ProductCommands
             _commandStr = commandStr;
         }
 
-        public async void Run()
+        public void Run()
         {
             var productCode = _commandStr.Split(' ')[1];
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(Global.ActionUrl($"/system/resetData/{productCode}"));
+            HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/product/getProductInfo/{productCode}")).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)
             {
-                resultMessage = await response.Content.ReadAsStringAsync();
+                resultMessage = response.Content.ReadAsStringAsync().Result;
             }
             Console.WriteLine(resultMessage);
         }

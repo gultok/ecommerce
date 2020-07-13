@@ -13,22 +13,22 @@ namespace ECommerce.Commands.ProductCommands
             _commandStr = commandStr;
         }
 
-        public async void Run()
+        public void Run()
         {
             var productCode = _commandStr.Split(' ')[1];
             var price = Convert.ToDouble(_commandStr.Split(' ')[2]);
             var stock = Convert.ToDouble(_commandStr.Split(' ')[3]);
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.PostAsJsonAsync(Global.ActionUrl($"/product/createProduct"), new ProductParam
+            HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/product/createProduct"), new ProductParam
             {
                 productcode = productCode,
                 price = price,
                 stock = stock
-            });
+            }).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)
             {
-                resultMessage = await response.Content.ReadAsStringAsync();
+                resultMessage = response.Content.ReadAsStringAsync().Result;
             }
             Console.WriteLine(resultMessage);
         }
