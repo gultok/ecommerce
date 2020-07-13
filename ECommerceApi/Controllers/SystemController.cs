@@ -7,7 +7,7 @@ namespace ECommerceApi.Controllers
     [ApiController]
     public class SystemController : ControllerBase
     {
-        [HttpGet("/system/resetData")]
+        [HttpPut("/system/reset-data")]
         public IActionResult ResetData()
         {
             Pool.ResetPool();

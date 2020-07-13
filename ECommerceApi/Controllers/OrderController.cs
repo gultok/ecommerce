@@ -8,10 +8,10 @@ namespace ECommerceApi.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        [HttpPost("/order/createOrder")]
+        [HttpPost("/order/create-order")]
         public IActionResult CreateOrder([FromBody] OrderInput order)
         {
-            var message = OrderHandler.CreateOrder(order.productCode, order.quantity);
+            var message = OrderHandler.CreateOrder(order.ProductCode, order.Quantity);
             return Ok(message);
         }
     }

@@ -2,8 +2,8 @@
 {
     public class ProductInput
     {
-        public string productcode { get; set; }
-        public double price { get; set; }
-        public double stock { get; set; }
+        public string ProductCode { get; set; }
+        public double Price { get; set; }
+        public double Stock { get; set; }
     }
 }

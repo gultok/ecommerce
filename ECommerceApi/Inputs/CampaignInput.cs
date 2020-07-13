@@ -2,10 +2,10 @@
 {
     public class CampaignInput
     {
-        public string name { get; set; }
-        public string productCode { get; set; }
-        public int duration { get; set; }
-        public double limit { get; set; }
-        public double targetSalesCount { get; set; }
+        public string Name { get; set; }
+        public string ProductCode { get; set; }
+        public int Duration { get; set; }
+        public double Limit { get; set; }
+        public double TargetSalesCount { get; set; }
     }
 }

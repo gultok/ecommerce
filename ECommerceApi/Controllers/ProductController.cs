@@ -9,15 +9,15 @@ namespace ECommerceApi.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        [HttpPost("/product/createProduct")]
+        [HttpPost("/product/create-product")]
         public IActionResult CreateProduct([FromBody] ProductInput product)
         {
             //product validate
-            var message = ProductHandler.CreateProduct(product.productcode, product.price, product.stock);
+            var message = ProductHandler.CreateProduct(product.ProductCode, product.Price, product.Stock);
             //mesajlar tek tip ve servisten?
             return Ok(message);
         }
-        [HttpGet("/product/getProductInfo/{productCode}")]
+        [HttpGet("/product/get-product-info/{productCode}")]
         public IActionResult GetProductInfo(string productCode)
         {
             var message = ProductHandler.GetProductInfo(productCode);
