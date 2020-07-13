@@ -47,8 +47,8 @@ namespace ECommerceCore
         public void ApplyCampaign(IProduct product)
         {
             //percentage * duration formülünü uygula
-            Percentage = (Time.CurrentTime - StartTime).Hours * 5;
-            product.CampaignPrice = product.Price * (1 - (Percentage / 100));
+            var percentage = Percentage + (Time.CurrentTime - StartTime).Hours * 5;
+            product.CampaignPrice = product.Price * (1 - (percentage / 100));
         }
 
         public bool CheckCampaignEnded()
