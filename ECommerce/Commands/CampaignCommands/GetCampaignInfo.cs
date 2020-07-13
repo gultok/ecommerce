@@ -1,6 +1,6 @@
-﻿using ECommerce.Requests;
-using System;
+﻿using System;
 using System.Linq;
+using System.Net.Http;
 
 namespace ECommerce.Commands
 {
@@ -13,9 +13,15 @@ namespace ECommerce.Commands
         }
         public async void Run()
         {
-            var firstParameter = _commandStr.Split(' ')[1];
-            string resultMsg = await CampaignRequests.GetCampaignInfo(firstParameter);
-            Console.WriteLine(resultMsg);
+            var name = _commandStr.Split(' ')[1];
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(Global.ActionUrl($"/campaign/getCampaignInfo/{name}"));
+            string resultMessage = "";
+            if (response.IsSuccessStatusCode)
+            {
+                resultMessage = await response.Content.ReadAsStringAsync();
+            }
+            Console.WriteLine(resultMessage);
         }
 
         public void Validate()

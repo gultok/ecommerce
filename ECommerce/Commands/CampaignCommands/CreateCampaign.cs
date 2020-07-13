@@ -1,7 +1,7 @@
 ﻿using ECommerce.ParameterObjects;
-using ECommerce.Requests;
 using System;
 using System.Linq;
+using System.Net.Http;
 
 namespace ECommerce.Commands
 {
@@ -14,20 +14,26 @@ namespace ECommerce.Commands
         }
         public async void Run()
         {
-            var firstParameter = _commandStr.Split(' ')[1];
-            var _2ndParam = _commandStr.Split(' ')[2];
-            var _3rdParam = Convert.ToInt32(_commandStr.Split(' ')[3]);
-            var _4thParam = Convert.ToDouble(_commandStr.Split(' ')[4]);
-            var _5thParam = Convert.ToDouble(_commandStr.Split(' ')[5]);
-            string resultMsg = await CampaignRequests.CreateCampaign(new CampaignParam
+            var name = _commandStr.Split(' ')[1];
+            var productCode = _commandStr.Split(' ')[2];
+            var duration = Convert.ToInt32(_commandStr.Split(' ')[3]);
+            var limit = Convert.ToDouble(_commandStr.Split(' ')[4]);
+            var targetSalesCount = Convert.ToDouble(_commandStr.Split(' ')[5]);
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.PostAsJsonAsync(Global.ActionUrl($"/campaign/getProductInfo"), new CampaignParam
             {
-                name = firstParameter,
-                productCode = _2ndParam,
-                duration = _3rdParam,
-                limit = _4thParam,
-                targetSalesCount = _5thParam
+                name = name,
+                productCode = productCode,
+                duration = duration,
+                limit = limit,
+                targetSalesCount = targetSalesCount
             });
-            Console.WriteLine(resultMsg);
+            string resultMessage = "";
+            if (response.IsSuccessStatusCode)
+            {
+                resultMessage = await response.Content.ReadAsStringAsync();
+            }
+            Console.WriteLine(resultMessage);
         }
 
         public void Validate()

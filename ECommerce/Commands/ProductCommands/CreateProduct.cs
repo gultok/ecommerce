@@ -1,6 +1,7 @@
 ﻿using ECommerce.ParameterObjects;
 using System;
 using System.Linq;
+using System.Net.Http;
 
 namespace ECommerce.Commands.ProductCommands
 {
@@ -14,16 +15,22 @@ namespace ECommerce.Commands.ProductCommands
 
         public async void Run()
         {
-            var firstParameter = _commandStr.Split(' ')[1];
-            var secondParam = Convert.ToDouble(_commandStr.Split(' ')[2]);
-            var thirdParam = Convert.ToDouble(_commandStr.Split(' ')[3]);
-            string resultMsg = await ProductRequests.CreateProductAsync(new ProductParam
+            var productCode = _commandStr.Split(' ')[1];
+            var price = Convert.ToDouble(_commandStr.Split(' ')[2]);
+            var stock = Convert.ToDouble(_commandStr.Split(' ')[3]);
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.PostAsJsonAsync(Global.ActionUrl($"/product/createProduct"), new ProductParam
             {
-                productcode = firstParameter,
-                price = secondParam,
-                stock = thirdParam
+                productcode = productCode,
+                price = price,
+                stock = stock
             });
-            Console.WriteLine(resultMsg);
+            string resultMessage = "";
+            if (response.IsSuccessStatusCode)
+            {
+                resultMessage = await response.Content.ReadAsStringAsync();
+            }
+            Console.WriteLine(resultMessage);
         }
 
         public void Validate()
