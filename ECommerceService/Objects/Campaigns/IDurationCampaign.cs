@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ECommerceService.Objects.Campaigns
+namespace ECommerceCore.Objects.Campaigns
 {
     public interface IDurationCampaign : ICampaign
     {

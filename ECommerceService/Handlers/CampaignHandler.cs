@@ -1,7 +1,7 @@
-﻿using ECommerceService.Objects.Campaigns;
+﻿using ECommerceCore.Objects.Campaigns;
 using System.Linq;
 
-namespace ECommerceService.Handlers
+namespace ECommerceCore.Handlers
 {
     public class CampaignHandler
     {

@@ -7,7 +7,7 @@ namespace ECommerce.Requests
         public static string ResetSystemData()
         {
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/system/resetData")).Result;
+            HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/system/reset-data")).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)
             {
@@ -18,7 +18,7 @@ namespace ECommerce.Requests
         public static string ResetTime()
         {
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/time/resetTime")).Result;
+            HttpResponseMessage response = client.PutAsync(Global.ActionUrl($"/time/reset-time"), null).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)
             {

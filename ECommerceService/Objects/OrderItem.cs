@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ECommerceService.Objects
+namespace ECommerceCore.Objects
 {
     public class OrderItem
     {

@@ -1,9 +1,9 @@
-﻿using ECommerceService.Enums;
+﻿using ECommerceCore.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ECommerceService.Handlers
+namespace ECommerceCore.Handlers
 {
     public class ProductHandler
     {

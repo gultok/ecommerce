@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerce", "ECommerce\ECommerce.csproj", "{E5D6E954-95D2-4194-A5F2-CE327F3D75B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceApi", "ECommerceApi\ECommerceApi.csproj", "{01BAA491-CC50-49F6-8E23-64E0D68F5294}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceApi", "ECommerceApi\ECommerceApi.csproj", "{01BAA491-CC50-49F6-8E23-64E0D68F5294}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceService", "ECommerceService\ECommerceService.csproj", "{AEB8C2F8-709E-4A82-95B9-58C46D534FF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceCore", "ECommerceService\ECommerceCore.csproj", "{AEB8C2F8-709E-4A82-95B9-58C46D534FF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,4 @@
-﻿using ECommerceService;
+﻿using ECommerceCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceApi.Controllers
@@ -7,13 +7,13 @@ namespace ECommerceApi.Controllers
     [ApiController]
     public class TimeController : ControllerBase
     {
-        [HttpPut("/time/increaseTime/{hours}")]
+        [HttpPost("/time/increase-time/{hours}")]
         public IActionResult IncreaseTime(int hours)
         {
             var message = Time.IncreaseTime(hours);
             return Ok(message);
         }
-        [HttpGet("/time/resetTime")]
+        [HttpPut("/time/reset-time")]
         public IActionResult ResetTime()
         {
             var message = Time.ResetTime();

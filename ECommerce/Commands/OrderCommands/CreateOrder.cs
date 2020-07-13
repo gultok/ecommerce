@@ -17,7 +17,7 @@ namespace ECommerce.Commands.OrderCommands
             var productCode = _commandStr.Split(' ')[1];
             var quantity = Convert.ToDouble(_commandStr.Split(' ')[2]);
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/order/createOrder"), new OrderParam
+            HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/order/create-order"), new OrderParam
             {
                 ProductCode = productCode,
                 Quantity = quantity

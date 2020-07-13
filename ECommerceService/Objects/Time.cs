@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ECommerceService
+namespace ECommerceCore
 {
     public static class Time
     {
