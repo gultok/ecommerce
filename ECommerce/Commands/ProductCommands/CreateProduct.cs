@@ -21,9 +21,9 @@ namespace ECommerce.Commands.ProductCommands
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/product/createProduct"), new ProductParam
             {
-                productcode = productCode,
-                price = price,
-                stock = stock
+                ProductCode = productCode,
+                Price = price,
+                Stock = stock
             }).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)

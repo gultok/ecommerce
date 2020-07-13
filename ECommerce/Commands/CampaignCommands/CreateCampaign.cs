@@ -22,11 +22,11 @@ namespace ECommerce.Commands
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/campaign/createCampaign"), new CampaignParam
             {
-                name = name,
-                productCode = productCode,
-                duration = duration,
-                limit = limit,
-                targetSalesCount = targetSalesCount
+                Name = name,
+                ProductCode = productCode,
+                Duration = duration,
+                Limit = limit,
+                TargetSalesCount = targetSalesCount
             }).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)

@@ -2,7 +2,7 @@
 {
     public class OrderParam
     {
-        public string productCode { get; set; }
-        public double quantity { get; set; }
+        public string ProductCode { get; set; }
+        public double Quantity { get; set; }
     }
 }

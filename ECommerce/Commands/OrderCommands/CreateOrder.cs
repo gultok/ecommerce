@@ -19,8 +19,8 @@ namespace ECommerce.Commands.OrderCommands
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/order/createOrder"), new OrderParam
             {
-                productCode = productCode,
-                quantity = quantity
+                ProductCode = productCode,
+                Quantity = quantity
             }).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)
