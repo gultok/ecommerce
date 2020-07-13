@@ -12,7 +12,7 @@ namespace ECommerce.Commands
         {
             _commandStr = commandStr;
         }
-        public async void Run()
+        public void Run()
         {
             var name = _commandStr.Split(' ')[1];
             var productCode = _commandStr.Split(' ')[2];
@@ -20,18 +20,18 @@ namespace ECommerce.Commands
             var limit = Convert.ToDouble(_commandStr.Split(' ')[4]);
             var targetSalesCount = Convert.ToDouble(_commandStr.Split(' ')[5]);
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.PostAsJsonAsync(Global.ActionUrl($"/campaign/getProductInfo"), new CampaignParam
+            HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/campaign/createCampaign"), new CampaignParam
             {
                 name = name,
                 productCode = productCode,
                 duration = duration,
                 limit = limit,
                 targetSalesCount = targetSalesCount
-            });
+            }).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)
             {
-                resultMessage = await response.Content.ReadAsStringAsync();
+                resultMessage = response.Content.ReadAsStringAsync().Result;
             }
             Console.WriteLine(resultMessage);
         }

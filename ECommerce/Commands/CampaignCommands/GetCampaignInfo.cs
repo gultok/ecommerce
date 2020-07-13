@@ -11,15 +11,15 @@ namespace ECommerce.Commands
         {
             _commandStr = commandStr;
         }
-        public async void Run()
+        public void Run()
         {
             var name = _commandStr.Split(' ')[1];
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(Global.ActionUrl($"/campaign/getCampaignInfo/{name}"));
+            HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/campaign/getCampaignInfo/{name}")).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)
             {
-                resultMessage = await response.Content.ReadAsStringAsync();
+                resultMessage = response.Content.ReadAsStringAsync().Result;
             }
             Console.WriteLine(resultMessage);
         }

@@ -19,10 +19,10 @@ namespace ECommerce
             command.Validate();
             command.Run();
         }
-        public static async void ResetSystemDataAndTime()
+        public static void ResetSystemDataAndTime()
         {
-            await SystemRequest.ResetTime();
-            await SystemRequest.ResetSystemData();
+            SystemRequest.ResetTime();
+            SystemRequest.ResetSystemData();
         }
     }
 }
