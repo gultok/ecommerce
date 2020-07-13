@@ -15,7 +15,7 @@ namespace ECommerce.Commands.CommonCommands
         {
             int hours = Convert.ToInt16(_commandStr.Split(' ')[1]);
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.PutAsync(Global.ActionUrl($"/time/increase-time/{hours}"), null).Result;
+            HttpResponseMessage response = client.PostAsync(Global.ActionUrl($"/time/increase-time/{hours}"), null).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)
             {

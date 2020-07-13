@@ -7,7 +7,7 @@ namespace ECommerceApi.Controllers
     [ApiController]
     public class TimeController : ControllerBase
     {
-        [HttpPut("/time/increase-time/{hours}")]
+        [HttpPost("/time/increase-time/{hours}")]
         public IActionResult IncreaseTime(int hours)
         {
             var message = Time.IncreaseTime(hours);
