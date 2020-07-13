@@ -1,33 +1,26 @@
-﻿using ECommerce.Commands;
-using ECommerce.ParameterObjects;
+﻿using ECommerce.ParameterObjects;
 using ECommerce.Requests;
 using System;
 using System.Linq;
 
-namespace ECom.Commands
+namespace ECommerce.Commands.OrderCommands
 {
-    public class OrderCommand : ICommand
+    public class CreateOrder : ICommand
     {
-        public OrderCommand(string commandStr)
+        public string _commandStr { get; set; }
+        public CreateOrder(string commandStr)
         {
             _commandStr = commandStr;
         }
-        public string _commandStr { get; set; }
-
         public async void Run()
         {
-            var commandName = _commandStr.Split(' ')[0];
             var firstParameter = _commandStr.Split(' ')[1];
             var secondParameter = Convert.ToDouble(_commandStr.Split(' ')[2]);
-            string resultMsg = "";
-            if (commandName.ToLower().Contains("create"))
+            string resultMsg = await OrderRequests.CreateOrder(new OrderParam
             {
-                resultMsg = await OrderRequests.CreateOrder(new OrderParam
-                {
-                    productCode = firstParameter,
-                    quantity = secondParameter
-                });
-            }
+                productCode = firstParameter,
+                quantity = secondParameter
+            });
             Console.WriteLine(resultMsg);
         }
 
