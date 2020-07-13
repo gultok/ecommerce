@@ -4,16 +4,16 @@ namespace ECommerceService
 {
     public static class Pool
     {
-        public static List<Product> Products = new List<Product>();
-        public static List<Campaign> Campaigns = new List<Campaign>();
+        public static List<IProduct> Products = new List<IProduct>();
+        public static List<ICampaign> Campaigns = new List<ICampaign>();
         public static List<Order> Orders = new List<Order>();
         public static void ResetProducts()
         {
-            Products = new List<Product>();
+            Products = new List<IProduct>();
         }
         public static void ResetCampaigns()
         {
-            Campaigns = new List<Campaign>();
+            Campaigns = new List<ICampaign>();
         }
         public static void ResetOrders()
         {

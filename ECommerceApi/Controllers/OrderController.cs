@@ -1,5 +1,5 @@
 ﻿using ECommerceApi.Inputs;
-using ECommerceService;
+using ECommerceService.Handlers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceApi.Controllers
@@ -11,7 +11,7 @@ namespace ECommerceApi.Controllers
         [HttpPost("/order/createOrder")]
         public IActionResult CreateOrder([FromBody] OrderInput order)
         {
-            var message = Order.CreateOrder(order.productCode, order.quantity);
+            var message = OrderHandler.CreateOrder(order.productCode, order.quantity);
             return Ok(message);
         }
     }

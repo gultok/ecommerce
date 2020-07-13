@@ -1,5 +1,6 @@
 ﻿using ECommerceApi.Inputs;
 using ECommerceService;
+using ECommerceService.Handlers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceApi.Controllers
@@ -11,15 +12,15 @@ namespace ECommerceApi.Controllers
         [HttpPost("/product/createProduct")]
         public IActionResult CreateProduct([FromBody] ProductInput product)
         {
-            var message = Product.CreateProduct(product.productcode, product.price, product.stock);
+            //product validate
+            var message = ProductHandler.CreateProduct(product.productcode, product.price, product.stock);
             //mesajlar tek tip ve servisten?
             return Ok(message);
         }
         [HttpGet("/product/getProductInfo/{productCode}")]
         public IActionResult GetProductInfo(string productCode)
         {
-            Product product;
-            var message = Product.GetProductInfo(productCode, out product);
+            var message = ProductHandler.GetProductInfo(productCode);
             return Ok(message);
         }
     }
