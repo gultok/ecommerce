@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net.Http;
 
 namespace ECommerce.Commands.ProductCommands
 {
@@ -13,9 +14,15 @@ namespace ECommerce.Commands.ProductCommands
 
         public async void Run()
         {
-            var firstParameter = _commandStr.Split(' ')[1];
-            string resultMsg = await ProductRequests.GetProductAsync(firstParameter);
-            Console.WriteLine(resultMsg);
+            var productCode = _commandStr.Split(' ')[1];
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(Global.ActionUrl($"/system/resetData/{productCode}"));
+            string resultMessage = "";
+            if (response.IsSuccessStatusCode)
+            {
+                resultMessage = await response.Content.ReadAsStringAsync();
+            }
+            Console.WriteLine(resultMessage);
         }
 
         public void Validate()

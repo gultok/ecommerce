@@ -1,6 +1,6 @@
-﻿using ECommerce.Requests;
-using System;
+﻿using System;
 using System.Linq;
+using System.Net.Http;
 
 namespace ECommerce.Commands.CommonCommands
 {
@@ -14,8 +14,14 @@ namespace ECommerce.Commands.CommonCommands
         public async void Run()
         {
             int hours = Convert.ToInt16(_commandStr.Split(' ')[1]);
-            string resultMsg = await TimeRequests.IncreaseTime(hours);
-            Console.WriteLine(resultMsg);
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.PutAsJsonAsync(Global.ActionUrl($"/time/increaseTime"), hours);
+            string resultMessage = "";
+            if (response.IsSuccessStatusCode)
+            {
+                resultMessage = await response.Content.ReadAsStringAsync();
+            }
+            Console.WriteLine(resultMessage);
         }
 
         public void Validate()

@@ -21,8 +21,8 @@ namespace ECommerce
         }
         public static async void ResetSystemDataAndTime()
         {
-            await TimeRequests.ResetTime();
-            await SystemRequests.ResetSystemData();
+            await SystemRequest.ResetTime();
+            await SystemRequest.ResetSystemData();
         }
     }
 }

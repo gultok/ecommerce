@@ -1,7 +1,7 @@
 ﻿using ECommerce.ParameterObjects;
-using ECommerce.Requests;
 using System;
 using System.Linq;
+using System.Net.Http;
 
 namespace ECommerce.Commands.OrderCommands
 {
@@ -14,14 +14,20 @@ namespace ECommerce.Commands.OrderCommands
         }
         public async void Run()
         {
-            var firstParameter = _commandStr.Split(' ')[1];
-            var secondParameter = Convert.ToDouble(_commandStr.Split(' ')[2]);
-            string resultMsg = await OrderRequests.CreateOrder(new OrderParam
+            var productCode = _commandStr.Split(' ')[1];
+            var quantity = Convert.ToDouble(_commandStr.Split(' ')[2]);
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.PostAsJsonAsync(Global.ActionUrl($"/order/createOrder"), new OrderParam
             {
-                productCode = firstParameter,
-                quantity = secondParameter
+                productCode = productCode,
+                quantity = quantity
             });
-            Console.WriteLine(resultMsg);
+            string resultMessage = "";
+            if (response.IsSuccessStatusCode)
+            {
+                resultMessage = await response.Content.ReadAsStringAsync();
+            }
+            Console.WriteLine(resultMessage);
         }
 
         public void Validate()
