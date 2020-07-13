@@ -1,6 +1,5 @@
 ﻿using ECommerceApi.Inputs;
-using ECommerceService;
-using ECommerceService.Handlers;
+using ECommerceCore.Handlers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceApi.Controllers

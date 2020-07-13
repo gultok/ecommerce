@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ECommerceService
+namespace ECommerceCore
 {
     public static class Pool
     {

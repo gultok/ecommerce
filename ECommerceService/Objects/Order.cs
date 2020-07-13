@@ -1,9 +1,9 @@
-﻿using ECommerceService.Enums;
-using ECommerceService.Objects;
+﻿using ECommerceCore.Enums;
+using ECommerceCore.Objects;
 using System;
 using System.Collections.Generic;
 
-namespace ECommerceService
+namespace ECommerceCore
 {
     public class Order
     {

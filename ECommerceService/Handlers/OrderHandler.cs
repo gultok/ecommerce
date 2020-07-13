@@ -1,10 +1,10 @@
-﻿using ECommerceService.Enums;
-using ECommerceService.Objects;
+﻿using ECommerceCore.Enums;
+using ECommerceCore.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ECommerceService.Handlers
+namespace ECommerceCore.Handlers
 {
     public class OrderHandler
     {

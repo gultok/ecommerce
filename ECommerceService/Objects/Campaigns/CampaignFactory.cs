@@ -1,9 +1,9 @@
-﻿using ECommerceService.Enums;
+﻿using ECommerceCore.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ECommerceService.Objects.Campaigns
+namespace ECommerceCore.Objects.Campaigns
 {
     public class CampaignFactory
     {

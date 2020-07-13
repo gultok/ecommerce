@@ -1,4 +1,4 @@
-﻿namespace ECommerceService.Enums
+﻿namespace ECommerceCore.Enums
 {
     public enum E_ManipulationType
     {

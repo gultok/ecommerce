@@ -1,7 +1,7 @@
-﻿using ECommerceService.Enums;
+﻿using ECommerceCore.Enums;
 using System;
 
-namespace ECommerceService
+namespace ECommerceCore
 {
     public interface ICampaign
     {

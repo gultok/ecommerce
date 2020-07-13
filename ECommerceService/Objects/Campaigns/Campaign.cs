@@ -1,8 +1,8 @@
-﻿using ECommerceService.Enums;
-using ECommerceService.Objects.Campaigns;
+﻿using ECommerceCore.Enums;
+using ECommerceCore.Objects.Campaigns;
 using System;
 
-namespace ECommerceService
+namespace ECommerceCore
 {
     public class Campaign : IProductDurationLimitTargetSalesCampaign
     {
