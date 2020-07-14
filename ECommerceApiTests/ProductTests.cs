@@ -26,8 +26,11 @@ namespace ECommerceApiTests
         [InlineData("/product/get-product-info", HttpStatusCode.NotFound)]
         public async Task Return_Not_Found_Error_Without_Product_Code(string url, HttpStatusCode expectedStatusCode)
         {
+            // Act
             var response = await _client.GetAsync(url);
             var actualStatusCode = response.StatusCode;
+
+            // Assert
             Assert.Equal(expectedStatusCode, actualStatusCode);
         }
 
@@ -37,9 +40,13 @@ namespace ECommerceApiTests
         {
             var expectedResult = $"Product not found: {productCode}";
 
+            // Act
             var response = await _client.GetAsync($"{url}/{productCode}");
+
             var actualStatusCode = response.StatusCode;
             var actualResponse = response.Content.ReadAsStringAsync().Result;
+
+            // Assert
             Assert.Equal(expectedStatusCode, actualStatusCode);
             Assert.Equal(expectedResult, actualResponse);
         }
@@ -48,8 +55,12 @@ namespace ECommerceApiTests
         [InlineData("/product/create-product", HttpStatusCode.UnsupportedMediaType)]
         public async Task Return_Unsupported_Media_Type_Without_Product_Info(string url, HttpStatusCode expectedStatusCode)
         {
+            // Act
             var response = await _client.PostAsync(url, null);
+
             var actualStatusCode = response.StatusCode;
+
+            // Assert
             Assert.Equal(expectedStatusCode, actualStatusCode);
         }
 
@@ -57,6 +68,9 @@ namespace ECommerceApiTests
         [InlineData("/product/create-product", "P1", 10, 100, HttpStatusCode.OK)]
         public async Task Return_OK_When_Product_Created(string createProductUrl, string productCode, double price, double stock, HttpStatusCode expectedStatusCode)
         {
+            var expectedResult = $"Product created; code {productCode}, price {price}, stock {stock}";
+
+            // Arrange
             var request = new ProductInput
             {
                 ProductCode = productCode,
@@ -65,17 +79,15 @@ namespace ECommerceApiTests
             };
             var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
-            var expectedResult = $"Product created; code {productCode}, price {price}, stock {stock}";
-
+            // Act
             var response = await _client.PostAsync(createProductUrl, content);
 
             var actualStatusCode = response.StatusCode;
             var actualResult = await response.Content.ReadAsStringAsync();
 
-            // Assert-1
+            // Assert
             Assert.Equal(expectedResult, actualResult);
             Assert.Equal(expectedStatusCode, actualStatusCode);
-
         }
 
         [Theory]
@@ -84,9 +96,13 @@ namespace ECommerceApiTests
         {
             var expectedResult = $"Product {productCode} info;";
 
+            // Act
             var response = await _client.GetAsync($"{url}/{productCode}");
+
             var actualStatusCode = response.StatusCode;
             var actualResponse = response.Content.ReadAsStringAsync().Result;
+
+            // Assert
             Assert.Equal(expectedStatusCode, actualStatusCode);
             Assert.Contains(expectedResult, actualResponse);
         }
@@ -95,6 +111,7 @@ namespace ECommerceApiTests
         [InlineData("/product/create-product", null, 10, 100, HttpStatusCode.BadRequest)]
         public async Task Return_Bad_Request_Without_ProductCode(string createProductUrl, string productCode, double price, double stock, HttpStatusCode expectedStatusCode)
         {
+            // Arrange
             var request = new ProductInput
             {
                 ProductCode = productCode,
@@ -103,10 +120,12 @@ namespace ECommerceApiTests
             };
             var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
+            // Act
             var response = await _client.PostAsync(createProductUrl, content);
 
             var actualStatusCode = response.StatusCode;
 
+            //Assert
             Assert.Equal(expectedStatusCode, actualStatusCode);
         }
 

@@ -26,8 +26,12 @@ namespace ECommerceApiTests
         [InlineData("/order/create-order", HttpStatusCode.UnsupportedMediaType)]
         public async Task Return_Unsupported_Media_Type_Without_Order_Info(string url, HttpStatusCode expectedStatusCode)
         {
+            // Act
             var response = await _client.PostAsync(url, null);
+            
             var actualStatusCode = response.StatusCode;
+
+            // Assert
             Assert.Equal(expectedStatusCode, actualStatusCode);
         }
 
@@ -36,6 +40,7 @@ namespace ECommerceApiTests
         [InlineData("/order/create-order", "P3", 0, HttpStatusCode.BadRequest)]
         public async Task Return_Bad_Request_Without_ProductCode_Or_Quantity(string url, string productCode, double quantity, HttpStatusCode expectedStatusCode)
         {
+            // Arrange
             var request = new OrderInput
             {
                 ProductCode = productCode,
@@ -43,9 +48,12 @@ namespace ECommerceApiTests
             };
             var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
+            // Act
             var response = await _client.PostAsync(url, content);
+            
             var actualStatusCode = response.StatusCode;
 
+            // Assert
             Assert.Equal(expectedStatusCode, actualStatusCode);
         }
 
@@ -53,6 +61,7 @@ namespace ECommerceApiTests
         [InlineData("/order/create-order", "P3", 15, HttpStatusCode.OK, "Product not found P3")]
         public async Task Return_OK_Product_Not_Found(string url, string productCode, double quantity, HttpStatusCode expectedStatusCode, string expectedResult)
         {
+            // Arrange
             var request = new OrderInput
             {
                 ProductCode = productCode,
@@ -60,10 +69,13 @@ namespace ECommerceApiTests
             };
             var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
+            // Act
             var response = await _client.PostAsync(url, content);
+            
             var actualStatusCode = response.StatusCode;
             var actualResponse = response.Content.ReadAsStringAsync().Result;
 
+            // Assert
             Assert.Equal(expectedStatusCode, actualStatusCode);
             Assert.Equal(expectedResult, actualResponse);
         }
@@ -74,6 +86,7 @@ namespace ECommerceApiTests
         [InlineData("/order/create-order", "P3", 100, HttpStatusCode.OK, "Product saleable stock is")]
         public async Task Return_OK_Product_Stock_Is_Not_Enough(string url, string productCode, double quantity, HttpStatusCode expectedStatusCode, string expectedResult)
         {
+            // Arrange
             var request = new OrderInput
             {
                 ProductCode = productCode,
@@ -81,10 +94,13 @@ namespace ECommerceApiTests
             };
             var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
+            // Act
             var response = await _client.PostAsync(url, content);
+            
             var actualStatusCode = response.StatusCode;
             var actualResponse = response.Content.ReadAsStringAsync().Result;
 
+            // Assert
             Assert.Equal(expectedStatusCode, actualStatusCode);
             Assert.Contains(expectedResult, actualResponse);
         }
@@ -93,6 +109,7 @@ namespace ECommerceApiTests
         [InlineData("/order/create-order", "P3", "TEN", HttpStatusCode.BadRequest)]
         public async Task Return_Bad_Request_Quantity_Is_Not_Number(string url, string productCode, string quantity, HttpStatusCode expectedStatusCode)
         {
+            // Arrange
             var request = new
             {
                 ProductCode = productCode,
@@ -100,9 +117,12 @@ namespace ECommerceApiTests
             };
             var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
+            // Act
             var response = await _client.PostAsync(url, content);
+            
             var actualStatusCode = response.StatusCode;
 
+            // Assert
             Assert.Equal(expectedStatusCode, actualStatusCode);
         }
     }
