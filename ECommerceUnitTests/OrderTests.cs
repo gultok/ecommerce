@@ -1,5 +1,5 @@
-﻿using ECommerce.ParameterObjects;
-using ECommerceApi;
+﻿using ECommerceApi;
+using ECommerceApi.Inputs;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ECommerceUnitTests.EComApiTests
+namespace ECommerceApiTests
 {
     public class OrderTests
     {
@@ -23,28 +23,26 @@ namespace ECommerceUnitTests.EComApiTests
         }
 
         [Theory]
-        [InlineData("/order/create-order")]
-        public async Task Return_Unsupported_Media_Type_Without_Order_Info(string url)
+        [InlineData("/order/create-order", HttpStatusCode.UnsupportedMediaType)]
+        public async Task Return_Unsupported_Media_Type_Without_Order_Info(string url, HttpStatusCode expectedStatusCode)
         {
-            var expectedStatusCode = HttpStatusCode.UnsupportedMediaType;
             var response = await _client.PostAsync(url, null);
             var actualStatusCode = response.StatusCode;
             Assert.Equal(expectedStatusCode, actualStatusCode);
         }
 
         [Theory]
-        [InlineData("/order/create-order", null, 10)]
-        [InlineData("/order/create-order", "P3", 0)]
-        public async Task Return_Bad_Request_Without_ProductCode_Or_Quantity(string url, string productCode, double quantity)
+        [InlineData("/order/create-order", null, 10, HttpStatusCode.BadRequest)]
+        [InlineData("/order/create-order", "P3", 0, HttpStatusCode.BadRequest)]
+        public async Task Return_Bad_Request_Without_ProductCode_Or_Quantity(string url, string productCode, double quantity, HttpStatusCode expectedStatusCode)
         {
-            var request = new OrderParam
+            var request = new OrderInput
             {
                 ProductCode = productCode,
                 Quantity = quantity
             };
             var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
-            var expectedStatusCode = HttpStatusCode.BadRequest;
             var response = await _client.PostAsync(url, content);
             var actualStatusCode = response.StatusCode;
 
@@ -52,18 +50,15 @@ namespace ECommerceUnitTests.EComApiTests
         }
 
         [Theory]
-        [InlineData("/order/create-order", "P3", 15)]
-        public async Task Return_OK_Product_Not_Found(string url, string productCode, double quantity)
+        [InlineData("/order/create-order", "P3", 15, HttpStatusCode.OK, "Product not found P3")]
+        public async Task Return_OK_Product_Not_Found(string url, string productCode, double quantity, HttpStatusCode expectedStatusCode, string expectedResult)
         {
-            var request = new OrderParam
+            var request = new OrderInput
             {
                 ProductCode = productCode,
                 Quantity = quantity
             };
             var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-
-            var expectedStatusCode = HttpStatusCode.OK;
-            var expectedResult = $"Product not found {productCode}";
 
             var response = await _client.PostAsync(url, content);
             var actualStatusCode = response.StatusCode;
@@ -76,18 +71,15 @@ namespace ECommerceUnitTests.EComApiTests
         //create product???
 
         [Theory]
-        [InlineData("/order/create-order", "P3", 100)]
-        public async Task Return_OK_Product_Stock_Is_Not_Enough(string url, string productCode, double quantity)
+        [InlineData("/order/create-order", "P3", 100, HttpStatusCode.OK, "Product saleable stock is")]
+        public async Task Return_OK_Product_Stock_Is_Not_Enough(string url, string productCode, double quantity, HttpStatusCode expectedStatusCode, string expectedResult)
         {
-            var request = new OrderParam
+            var request = new OrderInput
             {
                 ProductCode = productCode,
                 Quantity = quantity
             };
             var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-
-            var expectedStatusCode = HttpStatusCode.OK;
-            var expectedResult = $"Product saleable stock is";
 
             var response = await _client.PostAsync(url, content);
             var actualStatusCode = response.StatusCode;
@@ -98,8 +90,8 @@ namespace ECommerceUnitTests.EComApiTests
         }
 
         [Theory]
-        [InlineData("/order/create-order", "P3", "TEN")]
-        public async Task Return_Bad_Request_Quantity_Is_Not_Number(string url, string productCode, string quantity)
+        [InlineData("/order/create-order", "P3", "TEN", HttpStatusCode.BadRequest)]
+        public async Task Return_Bad_Request_Quantity_Is_Not_Number(string url, string productCode, string quantity, HttpStatusCode expectedStatusCode)
         {
             var request = new
             {
@@ -107,8 +99,6 @@ namespace ECommerceUnitTests.EComApiTests
                 Quantity = quantity
             };
             var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-
-            var expectedStatusCode = HttpStatusCode.BadRequest;
 
             var response = await _client.PostAsync(url, content);
             var actualStatusCode = response.StatusCode;
