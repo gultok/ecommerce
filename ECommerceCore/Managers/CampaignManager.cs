@@ -1,9 +1,9 @@
 ﻿using ECommerceCore.Objects.Campaigns;
 using System.Linq;
 
-namespace ECommerceCore.Handlers
+namespace ECommerceCore.Managers
 {
-    public class CampaignHandler
+    public class CampaignManager
     {
         public static string CreateCampaign(string campaignName, string productCode, int duration, double limit, double targetSalesCount)
         {

@@ -1,5 +1,5 @@
 ﻿using ECommerceApi.Models;
-using ECommerceCore.Handlers;
+using ECommerceCore.Managers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceApi.Controllers
@@ -14,13 +14,13 @@ namespace ECommerceApi.Controllers
             //product validation
             if (string.IsNullOrEmpty(product.ProductCode) || string.IsNullOrWhiteSpace(product.ProductCode))
                 return BadRequest("product code can not be null");
-            var message = ProductHandler.CreateProduct(product.ProductCode, product.Price, product.Stock);
+            var message = ProductManager.CreateProduct(product.ProductCode, product.Price, product.Stock);
             return Ok(message);
         }
         [HttpGet("/products/{productCode}")]
         public IActionResult GetProductInfo(string productCode)
         {
-            var message = ProductHandler.GetProductInfo(productCode);
+            var message = ProductManager.GetProductInfo(productCode);
             return Ok(message);
         }
     }

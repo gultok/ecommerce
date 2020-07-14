@@ -1,6 +1,13 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ECommerceApi",
+    "\\ECommerceApiTests",
+    "\\ECommerceApi\\Controllers",
+    "\\ECommerceCore",
+    "\\ECommerceCore\\Enums",
+    "\\ECommerceUnitTests"
   ],
+  "SelectedNode": "\\ECommerceApiTests\\OrderTests.cs",
   "PreviewInSolutionExplorer": false
 }

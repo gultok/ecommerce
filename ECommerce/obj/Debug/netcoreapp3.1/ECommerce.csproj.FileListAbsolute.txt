@@ -7,6 +7,7 @@ C:\Users\GULBENTOKALAK\Source\Repos\ecommerce\ECommerce\bin\Debug\netcoreapp3.1\
 C:\Users\GULBENTOKALAK\Source\Repos\ecommerce\ECommerce\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
 C:\Users\GULBENTOKALAK\Source\Repos\ecommerce\ECommerce\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\GULBENTOKALAK\Source\Repos\ecommerce\ECommerce\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\GULBENTOKALAK\Source\Repos\ecommerce\ECommerce\obj\Debug\netcoreapp3.1\ECommerce.csprojAssemblyReference.cache
 C:\Users\GULBENTOKALAK\Source\Repos\ecommerce\ECommerce\obj\Debug\netcoreapp3.1\ECommerce.AssemblyInfoInputs.cache
 C:\Users\GULBENTOKALAK\Source\Repos\ecommerce\ECommerce\obj\Debug\netcoreapp3.1\ECommerce.AssemblyInfo.cs
 C:\Users\GULBENTOKALAK\Source\Repos\ecommerce\ECommerce\obj\Debug\netcoreapp3.1\ECommerce.csproj.CoreCompileInputs.cache
