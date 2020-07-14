@@ -8,7 +8,7 @@ namespace ECommerceCore
         double? CampaignPrice { get; set; }
         string Code { get; set; }
         double? Price { get; set; }
-        double? Stock { get; set; }
+        int? Stock { get; set; }
         string GetProductInfo();
     }
 }

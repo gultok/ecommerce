@@ -55,7 +55,7 @@ namespace ECommerceApiTests
 
         [Theory]
         [InlineData("/product/create-product", "P1", 10, 100, HttpStatusCode.OK)]
-        public async Task Return_OK_When_Product_Created(string createProductUrl, string productCode, double price, double stock, HttpStatusCode expectedStatusCode)
+        public async Task Return_OK_When_Product_Created(string createProductUrl, string productCode, double price, int stock, HttpStatusCode expectedStatusCode)
         {
             var request = new ProductInput
             {
@@ -93,7 +93,7 @@ namespace ECommerceApiTests
 
         [Theory]
         [InlineData("/product/create-product", null, 10, 100, HttpStatusCode.BadRequest)]
-        public async Task Return_Bad_Request_Without_ProductCode(string createProductUrl, string productCode, double price, double stock, HttpStatusCode expectedStatusCode)
+        public async Task Return_Bad_Request_Without_ProductCode(string createProductUrl, string productCode, double price, int stock, HttpStatusCode expectedStatusCode)
         {
             var request = new ProductInput
             {

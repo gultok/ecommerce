@@ -18,7 +18,7 @@ namespace ECommerce.Commands
             var productCode = _commandStr.Split(' ')[2];
             var duration = Convert.ToInt32(_commandStr.Split(' ')[3]);
             var limit = Convert.ToDouble(_commandStr.Split(' ')[4]);
-            var targetSalesCount = Convert.ToDouble(_commandStr.Split(' ')[5]);
+            var targetSalesCount = Convert.ToInt32(_commandStr.Split(' ')[5]);
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/campaigns"), new CampaignParam
             {
@@ -52,8 +52,8 @@ namespace ECommerce.Commands
                 decimal limit;
                 if (!Decimal.TryParse(commandAry[4], out limit))
                     throw new Exception("Forth parameter must be a decimal");
-                double targetSalesCount;
-                if (!Double.TryParse(commandAry[5], out targetSalesCount))
+                int targetSalesCount;
+                if (!Int32.TryParse(commandAry[5], out targetSalesCount))
                     throw new Exception("Fiveth parameter must be a double");
             }
         }

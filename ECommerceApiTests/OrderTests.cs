@@ -34,7 +34,7 @@ namespace ECommerceApiTests
         [Theory]
         [InlineData("/order/create-order", null, 10, HttpStatusCode.BadRequest)]
         [InlineData("/order/create-order", "P3", 0, HttpStatusCode.BadRequest)]
-        public async Task Return_Bad_Request_Without_ProductCode_Or_Quantity(string url, string productCode, double quantity, HttpStatusCode expectedStatusCode)
+        public async Task Return_Bad_Request_Without_ProductCode_Or_Quantity(string url, string productCode, int quantity, HttpStatusCode expectedStatusCode)
         {
             var request = new OrderInput
             {
@@ -51,7 +51,7 @@ namespace ECommerceApiTests
 
         [Theory]
         [InlineData("/order/create-order", "P3", 15, HttpStatusCode.OK, "Product not found P3")]
-        public async Task Return_OK_Product_Not_Found(string url, string productCode, double quantity, HttpStatusCode expectedStatusCode, string expectedResult)
+        public async Task Return_OK_Product_Not_Found(string url, string productCode, int quantity, HttpStatusCode expectedStatusCode, string expectedResult)
         {
             var request = new OrderInput
             {
@@ -72,7 +72,7 @@ namespace ECommerceApiTests
 
         [Theory]
         [InlineData("/order/create-order", "P3", 100, HttpStatusCode.OK, "Product saleable stock is")]
-        public async Task Return_OK_Product_Stock_Is_Not_Enough(string url, string productCode, double quantity, HttpStatusCode expectedStatusCode, string expectedResult)
+        public async Task Return_OK_Product_Stock_Is_Not_Enough(string url, string productCode, int quantity, HttpStatusCode expectedStatusCode, string expectedResult)
         {
             var request = new OrderInput
             {

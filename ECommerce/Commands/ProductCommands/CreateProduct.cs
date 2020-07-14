@@ -17,7 +17,7 @@ namespace ECommerce.Commands.ProductCommands
         {
             var productCode = _commandStr.Split(' ')[1];
             var price = Convert.ToDouble(_commandStr.Split(' ')[2]);
-            var stock = Convert.ToDouble(_commandStr.Split(' ')[3]);
+            var stock = Convert.ToInt32(_commandStr.Split(' ')[3]);
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/products"), new ProductParam
             {
@@ -45,8 +45,8 @@ namespace ECommerce.Commands.ProductCommands
                 double price;
                 if (!Double.TryParse(commandAry[2], out price))
                     throw new Exception("Second parameter must be a decimal");
-                double stock;
-                if (!Double.TryParse(commandAry[3], out stock))
+                int stock;
+                if (!Int32.TryParse(commandAry[3], out stock))
                     throw new Exception("Third parameter must be a double");
             }
         }
