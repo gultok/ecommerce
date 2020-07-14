@@ -1,5 +1,5 @@
 ﻿using ECommerceApi.Models;
-using ECommerceCore.Handlers;
+using ECommerceCore.Managers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceApi.Controllers
@@ -15,7 +15,7 @@ namespace ECommerceApi.Controllers
                 return BadRequest("Product code can not be null");
             if (order.Quantity <= 0)
                 return BadRequest("Quantity must be greater than zero");
-            var message = OrderHandler.CreateOrder(order.ProductCode, order.Quantity);
+            var message = OrderManager.CreateOrder(order.ProductCode, order.Quantity);
             return Ok(message);
         }
     }

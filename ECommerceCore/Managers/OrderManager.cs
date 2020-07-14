@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ECommerceCore.Handlers
+namespace ECommerceCore.Managers
 {
-    public class OrderHandler
+    public class OrderManager
     {
         public static string CreateOrder(string productCode, double quantity)
         {

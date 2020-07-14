@@ -1,5 +1,5 @@
 ﻿using ECommerceApi.Models;
-using ECommerceCore.Handlers;
+using ECommerceCore.Managers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceApi.Controllers
@@ -11,13 +11,13 @@ namespace ECommerceApi.Controllers
         [HttpPost("/campaigns")]
         public IActionResult CreateCampaign([FromBody] CampaignInput campaign)
         {
-            var message = CampaignHandler.CreateCampaign(campaign.Name, campaign.ProductCode, campaign.Duration, campaign.Limit, campaign.TargetSalesCount);
+            var message = CampaignManager.CreateCampaign(campaign.Name, campaign.ProductCode, campaign.Duration, campaign.Limit, campaign.TargetSalesCount);
             return Ok(message);
         }
         [HttpGet("/campaigns/{campaignName}")]
         public IActionResult GetCampaignInfo(string campaignName)
         {
-            var message = CampaignHandler.GetCampaignInfo(campaignName);
+            var message = CampaignManager.GetCampaignInfo(campaignName);
             return Ok(message);
         }
     }

@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ECommerceCore.Handlers
+namespace ECommerceCore.Managers
 {
-    public class ProductHandler
+    public class ProductManager
     {
         public static string CreateProduct(string productCode, double price, double stock)
         {
