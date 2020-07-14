@@ -9,27 +9,41 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ECommerceUnitTests
+namespace ECommerceUnitTests.EComApiTests
 {
-    public class EComApiTests
+    public class ProductTests
     {
         private readonly HttpClient _client;
-        public EComApiTests()
+        public ProductTests()
         {
             var testServer = new TestServer(new WebHostBuilder()
-        .UseStartup<Startup>()
-        .UseEnvironment("Development"));
+                                            .UseStartup<Startup>()
+                                            .UseEnvironment("Development"));
             _client = testServer.CreateClient();
         }
 
         [Theory]
-        [InlineData("/product/get-product")]
+        [InlineData("/product/get-product-info")]
         public async Task Return_Not_Found_Error_Without_Product_Code(string url)
         {
             var expectedStatusCode = HttpStatusCode.NotFound;
             var response = await _client.GetAsync(url);
             var actualStatusCode = response.StatusCode;
             Assert.Equal(expectedStatusCode, actualStatusCode);
+        }
+
+        [Theory]
+        [InlineData("/product/get-product-info", "P1")]
+        public async Task Return_OK_And_Not_Found_Product(string url, string productCode)
+        {
+            var expectedStatusCode = HttpStatusCode.OK;
+            var expectedResult = $"Product not found: {productCode}";
+
+            var response = await _client.GetAsync($"{url}/{productCode}");
+            var actualStatusCode = response.StatusCode;
+            var actualResponse = response.Content.ReadAsStringAsync().Result;
+            Assert.Equal(expectedStatusCode, actualStatusCode);
+            Assert.Equal(expectedResult, actualResponse);
         }
 
         [Theory]
@@ -67,9 +81,23 @@ namespace ECommerceUnitTests
             Assert.Equal(expectedStatusCode, actualStatusCode);
 
         }
+
+        [Theory]
+        [InlineData("/product/get-product-info", "P1")]
+        public async Task Return_OK_And_Get_Product_Info(string url, string productCode)
+        {
+            var expectedStatusCode = HttpStatusCode.OK;
+            var expectedResult = $"Product {productCode} info;";
+
+            var response = await _client.GetAsync($"{url}/{productCode}");
+            var actualStatusCode = response.StatusCode;
+            var actualResponse = response.Content.ReadAsStringAsync().Result;
+            Assert.Equal(expectedStatusCode, actualStatusCode);
+            Assert.Contains(expectedResult, actualResponse);
+        }
+
         [Theory]
         [InlineData("/product/create-product", null, 10, 100)]
-        [InlineData("/product/create-product", "P1", 10, 100)]
         public async Task Return_Bad_Request_Without_ProductCode(string createProductUrl, string productCode, double price, double stock)
         {
             var request = new ProductParam
@@ -88,5 +116,8 @@ namespace ECommerceUnitTests
 
             Assert.Equal(expectedStatusCode, actualStatusCode);
         }
+
+        //[InlineData("/product/create-product", "P1", 10, 100)]
+
     }
 }

@@ -17,7 +17,8 @@ namespace ECommerceCore.Handlers
             //order stock control
             if (product.Stock < quantity)
             {
-                quantity = product.Stock.Value;
+                //quantity = product.Stock.Value;
+                return $"Product saleable stock is {product.Stock}";
             }
 
             List<OrderItem> orderItems = new List<OrderItem>();
