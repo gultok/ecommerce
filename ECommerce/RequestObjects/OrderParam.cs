@@ -3,6 +3,6 @@
     public class OrderParam
     {
         public string ProductCode { get; set; }
-        public double Quantity { get; set; }
+        public int Quantity { get; set; }
     }
 }

@@ -5,7 +5,7 @@ namespace ECommerceCore
     public class Product : IProduct
     {
         public Product() { }
-        public Product(string _code, double _stock, double _price)
+        public Product(string _code, int _stock, double _price)
         {
             Id = Guid.NewGuid();
             Code = _code;
@@ -15,7 +15,7 @@ namespace ECommerceCore
         }
         public Guid Id { get; set; }
         public string Code { get; set; }
-        public double? Stock { get; set; }
+        public int? Stock { get; set; }
         public double? Price { get; set; }
         public double? CampaignPrice { get; set; }
 

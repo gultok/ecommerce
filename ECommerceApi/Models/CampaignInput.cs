@@ -6,6 +6,6 @@
         public string ProductCode { get; set; }
         public int Duration { get; set; }
         public double Limit { get; set; }
-        public double TargetSalesCount { get; set; }
+        public int TargetSalesCount { get; set; }
     }
 }

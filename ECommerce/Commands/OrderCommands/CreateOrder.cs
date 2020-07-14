@@ -15,7 +15,7 @@ namespace ECommerce.Commands.OrderCommands
         public void Run()
         {
             var productCode = _commandStr.Split(' ')[1];
-            var quantity = Convert.ToDouble(_commandStr.Split(' ')[2]);
+            var quantity = Convert.ToInt32(_commandStr.Split(' ')[2]);
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/orders"), new OrderParam
             {
@@ -43,8 +43,8 @@ namespace ECommerce.Commands.OrderCommands
                 throw new Exception("Should be least 1 parameter");
             if (commandAry.Count() > 3)
             {
-                double stock;
-                if (!Double.TryParse(commandAry[2], out stock))
+                int stock;
+                if (!Int32.TryParse(commandAry[2], out stock))
                     throw new Exception("Second parameter must be a double");
             }
         }
