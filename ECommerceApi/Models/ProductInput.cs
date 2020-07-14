@@ -1,4 +1,4 @@
-﻿namespace ECommerceApi.Inputs
+﻿namespace ECommerceApi.Models
 {
     public class ProductInput
     {

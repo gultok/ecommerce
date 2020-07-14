@@ -1,6 +1,6 @@
 ﻿namespace ECommerceCore.Enums
 {
-    public enum E_ManipulationType
+    public enum ManipulationType
     {
         Increase,
         Decrease

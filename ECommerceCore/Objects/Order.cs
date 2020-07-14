@@ -9,11 +9,11 @@ namespace ECommerceCore
     {
         public Guid Id { get; set; }
         public List<OrderItem> OrderItems { get; set; }
-        public E_OrderStatus Status { get; set; }
+        public OrderStatus Status { get; set; }
         public Order()
         {
             Id = Guid.NewGuid();
-            Status = E_OrderStatus.Active;
+            Status = OrderStatus.Active;
         }
     }
 }

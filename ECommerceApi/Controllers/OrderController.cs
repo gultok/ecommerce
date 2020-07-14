@@ -1,4 +1,4 @@
-﻿using ECommerceApi.Inputs;
+﻿using ECommerceApi.Models;
 using ECommerceCore.Handlers;
 using Microsoft.AspNetCore.Mvc;
 

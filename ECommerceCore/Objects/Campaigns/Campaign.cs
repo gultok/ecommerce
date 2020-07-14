@@ -26,11 +26,11 @@ namespace ECommerceCore
         public double TargetSalesCount { get; set; }
         public decimal AverageItemPrice { get; set; }
         public string CampaignName { get; set; }
-        public E_ManipulationType ManipulationType { get; set; }
+        public ManipulationType ManipulationType { get; set; }
         public double ManipulationValue { get; set; }
         public double Percentage { get; set; }
         public TimeSpan StartTime { get; set; }
-        public E_CampaignStatus Status { get; set; }
+        public CampaignStatus Status { get; set; }
         public double TotalSalesCount { get; set; }
         public double Turnover { get; set; }
 
@@ -39,7 +39,7 @@ namespace ECommerceCore
         {
             if (CheckCampaignEnded())
             {
-                Status = E_CampaignStatus.Ended;
+                Status = CampaignStatus.Ended;
             }
             return $"Campaign {CampaignName} info; Status {Status}, Target Sales {TargetSalesCount},Total Sales {TotalSalesCount}, Turnover {Turnover}, Average Item Price {AverageItemPrice}";
         }
