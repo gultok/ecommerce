@@ -17,3 +17,8 @@ bin-release/
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.
 /.vs/ECommerce/v16/.suo
+
+bin/ 	# ignore bin directory
+*.obj 	# ignore any files with .obj postfix
+
+.vs/
