@@ -11,13 +11,13 @@ namespace ECommerceApi.Controllers
         [HttpPost("/campaigns")]
         public IActionResult CreateCampaign([FromBody] CampaignInput campaign)
         {
-            var message = CampaignManager.CreateCampaign(campaign.Name, campaign.ProductCode, campaign.Duration, campaign.Limit, campaign.TargetSalesCount);
+            var message = new CampaignManager().CreateCampaign(campaign.Name, campaign.ProductCode, campaign.Duration, campaign.Limit, campaign.TargetSalesCount);
             return Ok(message);
         }
         [HttpGet("/campaigns/{campaignName}")]
         public IActionResult GetCampaignInfo(string campaignName)
         {
-            var message = CampaignManager.GetCampaignInfo(campaignName);
+            var message = new CampaignManager().GetCampaignInfo(campaignName);
             return Ok(message);
         }
     }

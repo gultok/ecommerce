@@ -13,7 +13,7 @@ namespace ECommerce
         }
         public static void ValidateAndRunCommand(string line)
         {
-            ICommand command = CommandConverter.GetCommand(line);
+            ICommand command = new CommandConverter().GetCommand(line);
             if (command == null)
                 throw new Exception("Command does not found");
             command.Validate();

@@ -8,7 +8,7 @@ namespace ECommerceCore.Managers
 {
     public class OrderManager
     {
-        public static string CreateOrder(string productCode, int quantity)
+        public string CreateOrder(string productCode, int quantity)
         {
             var product = Pool.Products.FirstOrDefault(p => p.Code.ToLower() == productCode.ToLower());
             //add validation

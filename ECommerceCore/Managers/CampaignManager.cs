@@ -5,13 +5,13 @@ namespace ECommerceCore.Managers
 {
     public class CampaignManager
     {
-        public static string CreateCampaign(string campaignName, string productCode, int duration, double limit, double targetSalesCount)
+        public string CreateCampaign(string campaignName, string productCode, int duration, double limit, double targetSalesCount)
         {
             var resultMessage = "";
             // campaign type checker 
             if (productCode != null && duration != 0 && limit != 0 && targetSalesCount != 0)
             {
-                resultMessage = CampaignFactory.CreateCampaign(campaignName, productCode, duration, limit, targetSalesCount);
+                resultMessage = new CampaignFactory().CreateCampaign(campaignName, productCode, duration, limit, targetSalesCount);
             }
             else if (productCode != null && duration != 0 && limit != 0)
             {
@@ -20,7 +20,7 @@ namespace ECommerceCore.Managers
             }
             return resultMessage;
         }
-        public static string GetCampaignInfo(string campaignName)
+        public string GetCampaignInfo(string campaignName)
         {
             ICampaign campaign = Pool.Campaigns.FirstOrDefault(c => c.CampaignName.ToLower() == campaignName.ToLower());
             if (campaign != null)
