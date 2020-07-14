@@ -23,20 +23,18 @@ namespace ECommerceUnitTests.EComApiTests
         }
 
         [Theory]
-        [InlineData("/product/get-product-info")]
-        public async Task Return_Not_Found_Error_Without_Product_Code(string url)
+        [InlineData("/product/get-product-info", HttpStatusCode.NotFound)]
+        public async Task Return_Not_Found_Error_Without_Product_Code(string url, HttpStatusCode expectedStatusCode)
         {
-            var expectedStatusCode = HttpStatusCode.NotFound;
             var response = await _client.GetAsync(url);
             var actualStatusCode = response.StatusCode;
             Assert.Equal(expectedStatusCode, actualStatusCode);
         }
 
         [Theory]
-        [InlineData("/product/get-product-info", "P1")]
-        public async Task Return_OK_And_Not_Found_Product(string url, string productCode)
+        [InlineData("/product/get-product-info", "P1", HttpStatusCode.OK)]
+        public async Task Return_OK_And_Not_Found_Product(string url, string productCode, HttpStatusCode expectedStatusCode)
         {
-            var expectedStatusCode = HttpStatusCode.OK;
             var expectedResult = $"Product not found: {productCode}";
 
             var response = await _client.GetAsync($"{url}/{productCode}");
@@ -47,18 +45,17 @@ namespace ECommerceUnitTests.EComApiTests
         }
 
         [Theory]
-        [InlineData("/product/create-product")]
-        public async Task Return_Unsupported_Media_Type_Without_Product_Info(string url)
+        [InlineData("/product/create-product", HttpStatusCode.UnsupportedMediaType)]
+        public async Task Return_Unsupported_Media_Type_Without_Product_Info(string url, HttpStatusCode expectedStatusCode)
         {
-            var expectedStatusCode = HttpStatusCode.UnsupportedMediaType;
             var response = await _client.PostAsync(url, null);
             var actualStatusCode = response.StatusCode;
             Assert.Equal(expectedStatusCode, actualStatusCode);
         }
 
         [Theory]
-        [InlineData("/product/create-product", "P1", 10, 100)]
-        public async Task Return_OK_When_Product_Created(string createProductUrl, string productCode, double price, double stock)
+        [InlineData("/product/create-product", "P1", 10, 100, HttpStatusCode.OK)]
+        public async Task Return_OK_When_Product_Created(string createProductUrl, string productCode, double price, double stock, HttpStatusCode expectedStatusCode)
         {
             var request = new ProductParam
             {
@@ -69,7 +66,6 @@ namespace ECommerceUnitTests.EComApiTests
             var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
             var expectedResult = $"Product created; code {productCode}, price {price}, stock {stock}";
-            var expectedStatusCode = HttpStatusCode.OK;
 
             var response = await _client.PostAsync(createProductUrl, content);
 
@@ -83,10 +79,9 @@ namespace ECommerceUnitTests.EComApiTests
         }
 
         [Theory]
-        [InlineData("/product/get-product-info", "P1")]
-        public async Task Return_OK_And_Get_Product_Info(string url, string productCode)
+        [InlineData("/product/get-product-info", "P1", HttpStatusCode.OK)]
+        public async Task Return_OK_And_Get_Product_Info(string url, string productCode, HttpStatusCode expectedStatusCode)
         {
-            var expectedStatusCode = HttpStatusCode.OK;
             var expectedResult = $"Product {productCode} info;";
 
             var response = await _client.GetAsync($"{url}/{productCode}");
@@ -97,8 +92,8 @@ namespace ECommerceUnitTests.EComApiTests
         }
 
         [Theory]
-        [InlineData("/product/create-product", null, 10, 100)]
-        public async Task Return_Bad_Request_Without_ProductCode(string createProductUrl, string productCode, double price, double stock)
+        [InlineData("/product/create-product", null, 10, 100, HttpStatusCode.BadRequest)]
+        public async Task Return_Bad_Request_Without_ProductCode(string createProductUrl, string productCode, double price, double stock, HttpStatusCode expectedStatusCode)
         {
             var request = new ProductParam
             {
@@ -107,8 +102,6 @@ namespace ECommerceUnitTests.EComApiTests
                 Stock = stock
             };
             var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-
-            var expectedStatusCode = HttpStatusCode.BadRequest;
 
             var response = await _client.PostAsync(createProductUrl, content);
 

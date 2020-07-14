@@ -20,22 +20,18 @@ namespace ECommerceUnitTests.EComApiTests
         }
 
         [Theory]
-        [InlineData("/campaign/get-campaign-info")]
-        public async Task Return_Not_Found_Error_Without_CampaignName(string url)
+        [InlineData("/campaign/get-campaign-info", HttpStatusCode.NotFound)]
+        public async Task Return_Not_Found_Error_Without_CampaignName(string url, HttpStatusCode expectedStatusCode)
         {
-            var expectedStatusCode = HttpStatusCode.NotFound;
             var response = await _client.GetAsync(url);
             var actualStatusCode = response.StatusCode;
             Assert.Equal(expectedStatusCode, actualStatusCode);
         }
 
         [Theory]
-        [InlineData("/campaign/get-campaign-info", "C1")]
-        public async Task Return_OK_And_Not_Found_Campaign(string url, string campaignName)
+        [InlineData("/campaign/get-campaign-info", "C1", HttpStatusCode.OK, "Campaign not found: C1")]
+        public async Task Return_OK_And_Not_Found_Campaign(string url, string campaignName, HttpStatusCode expectedStatusCode, string expectedResult)
         {
-            var expectedStatusCode = HttpStatusCode.OK;
-            var expectedResult = $"Campaign not found: {campaignName}";
-
             var response = await _client.GetAsync($"{url}/{campaignName}");
             var actualStatusCode = response.StatusCode;
             var actualResponse = response.Content.ReadAsStringAsync().Result;
