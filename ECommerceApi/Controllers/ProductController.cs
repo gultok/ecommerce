@@ -12,9 +12,10 @@ namespace ECommerceApi.Controllers
         [HttpPost("/product/create-product")]
         public IActionResult CreateProduct([FromBody] ProductInput product)
         {
-            //product validate
+            //product validation
+            if (string.IsNullOrEmpty(product.ProductCode) || string.IsNullOrWhiteSpace(product.ProductCode))
+                return BadRequest("product code can not be null");
             var message = ProductHandler.CreateProduct(product.ProductCode, product.Price, product.Stock);
-            //mesajlar tek tip ve servisten?
             return Ok(message);
         }
         [HttpGet("/product/get-product-info/{productCode}")]
