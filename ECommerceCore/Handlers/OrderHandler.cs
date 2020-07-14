@@ -22,7 +22,7 @@ namespace ECommerceCore.Handlers
             }
 
             List<OrderItem> orderItems = new List<OrderItem>();
-            List<ICampaign> campaigns = Pool.Campaigns.Where(c => c.Status == E_CampaignStatus.Active).ToList();
+            List<ICampaign> campaigns = Pool.Campaigns.Where(c => c.Status == CampaignStatus.Active).ToList();
             List<Guid> appliedCampaigns = new List<Guid>();
             product.CampaignPrice = product.Price;
             foreach (var campaign in campaigns)

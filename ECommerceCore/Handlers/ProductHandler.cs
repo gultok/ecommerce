@@ -24,7 +24,7 @@ namespace ECommerceCore.Handlers
             {
                 productCode = product.Code;
                 //check campaigns
-                List<ICampaign> productCampaigns = Pool.Campaigns.Where(c => c.Status == E_CampaignStatus.Active).ToList();
+                List<ICampaign> productCampaigns = Pool.Campaigns.Where(c => c.Status == CampaignStatus.Active).ToList();
                 if (productCampaigns.Count != 0)
                 {
                     product.CampaignPrice = product.Price;

@@ -1,6 +1,6 @@
 ﻿namespace ECommerceCore.Enums
 {
-    public enum E_OrderStatus
+    public enum OrderStatus
     {
         Active,
         Cancel
