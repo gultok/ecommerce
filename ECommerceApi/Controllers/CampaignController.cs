@@ -8,13 +8,13 @@ namespace ECommerceApi.Controllers
     [ApiController]
     public class CampaignController : ControllerBase
     {
-        [HttpPost("/campaign/create-campaign")]
+        [HttpPost("/campaigns")]
         public IActionResult CreateCampaign([FromBody] CampaignInput campaign)
         {
             var message = CampaignHandler.CreateCampaign(campaign.Name, campaign.ProductCode, campaign.Duration, campaign.Limit, campaign.TargetSalesCount);
             return Ok(message);
         }
-        [HttpGet("/campaign/get-campaign-info/{campaignName}")]
+        [HttpGet("/campaigns/{campaignName}")]
         public IActionResult GetCampaignInfo(string campaignName)
         {
             var message = CampaignHandler.GetCampaignInfo(campaignName);

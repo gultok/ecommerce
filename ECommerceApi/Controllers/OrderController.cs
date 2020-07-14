@@ -8,7 +8,7 @@ namespace ECommerceApi.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        [HttpPost("/order/create-order")]
+        [HttpPost("/orders")]
         public IActionResult CreateOrder([FromBody] OrderInput order)
         {
             if (string.IsNullOrEmpty(order.ProductCode) || string.IsNullOrWhiteSpace(order.ProductCode))

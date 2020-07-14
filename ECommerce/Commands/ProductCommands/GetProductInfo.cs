@@ -16,7 +16,7 @@ namespace ECommerce.Commands.ProductCommands
         {
             var productCode = _commandStr.Split(' ')[1];
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/product/get-product-info/{productCode}")).Result;
+            HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/products/{productCode}")).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)
             {

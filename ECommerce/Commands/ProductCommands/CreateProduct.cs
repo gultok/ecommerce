@@ -19,7 +19,7 @@ namespace ECommerce.Commands.ProductCommands
             var price = Convert.ToDouble(_commandStr.Split(' ')[2]);
             var stock = Convert.ToDouble(_commandStr.Split(' ')[3]);
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/product/create-product"), new ProductParam
+            HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/products"), new ProductParam
             {
                 ProductCode = productCode,
                 Price = price,

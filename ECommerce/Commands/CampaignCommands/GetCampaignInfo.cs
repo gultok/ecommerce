@@ -15,7 +15,7 @@ namespace ECommerce.Commands
         {
             var name = _commandStr.Split(' ')[1];
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/campaign/get-campaign-info/{name}")).Result;
+            HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/campaigns/{name}")).Result;
             string resultMessage = "";
             if (response.IsSuccessStatusCode)
             {

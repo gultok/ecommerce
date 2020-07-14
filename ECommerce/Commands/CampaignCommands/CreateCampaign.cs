@@ -20,7 +20,7 @@ namespace ECommerce.Commands
             var limit = Convert.ToDouble(_commandStr.Split(' ')[4]);
             var targetSalesCount = Convert.ToDouble(_commandStr.Split(' ')[5]);
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/campaign/create-campaign"), new CampaignParam
+            HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/campaigns"), new CampaignParam
             {
                 Name = name,
                 ProductCode = productCode,
