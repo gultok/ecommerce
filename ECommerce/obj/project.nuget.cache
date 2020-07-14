@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DAdpEENJmhYhCXB7MKCVGi7E5+63EsJrTX+roFJO+g5BhcC5QrBJmNExqH5QL+yHX97IvJ/9A9jLQ0Clap09ww==",
+  "dgSpecHash": "FpwuytdQNEnKVn2vWPZj9DOveFUwFB7swBxRYtNYbDAdSmLEtOVybBx/T+eRiKNCOHnHcrlT3gp69YUTcifq/w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\GULBENTOKALAK\\source\\repos\\ECommerce\\ECommerce\\ECommerce.csproj",
+  "projectFilePath": "C:\\Users\\GULBENTOKALAK\\Source\\Repos\\ecommerce\\ECommerce\\ECommerce.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\GULBENTOKALAK\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
     "C:\\Users\\GULBENTOKALAK\\.nuget\\packages\\microsoft.csharp\\4.3.0\\microsoft.csharp.4.3.0.nupkg.sha512",

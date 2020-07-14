@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\GULBENTOKALAK\\source\\repos\\ECommerce\\ECommerce\\ECommerce.csproj": {}
+    "C:\\Users\\GULBENTOKALAK\\Source\\Repos\\ecommerce\\ECommerce\\ECommerce.csproj": {}
   },
   "projects": {
-    "C:\\Users\\GULBENTOKALAK\\source\\repos\\ECommerce\\ECommerce\\ECommerce.csproj": {
+    "C:\\Users\\GULBENTOKALAK\\Source\\Repos\\ecommerce\\ECommerce\\ECommerce.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\GULBENTOKALAK\\source\\repos\\ECommerce\\ECommerce\\ECommerce.csproj",
+        "projectUniqueName": "C:\\Users\\GULBENTOKALAK\\Source\\Repos\\ecommerce\\ECommerce\\ECommerce.csproj",
         "projectName": "ECommerce",
-        "projectPath": "C:\\Users\\GULBENTOKALAK\\source\\repos\\ECommerce\\ECommerce\\ECommerce.csproj",
+        "projectPath": "C:\\Users\\GULBENTOKALAK\\Source\\Repos\\ecommerce\\ECommerce\\ECommerce.csproj",
         "packagesPath": "C:\\Users\\GULBENTOKALAK\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\GULBENTOKALAK\\source\\repos\\ECommerce\\ECommerce\\obj\\",
+        "outputPath": "C:\\Users\\GULBENTOKALAK\\Source\\Repos\\ecommerce\\ECommerce\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\GULBENTOKALAK\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerce", "ECommerce\ECom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceApi", "ECommerceApi\ECommerceApi.csproj", "{01BAA491-CC50-49F6-8E23-64E0D68F5294}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceCore", "ECommerceService\ECommerceCore.csproj", "{AEB8C2F8-709E-4A82-95B9-58C46D534FF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceCore", "ECommerceCore\ECommerceCore.csproj", "{AEB8C2F8-709E-4A82-95B9-58C46D534FF8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceApiTests", "ECommerceUnitTests\ECommerceApiTests.csproj", "{03046A16-EDD6-4281-9B7B-8641EF160733}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceApiTests", "ECommerceApiTests\ECommerceApiTests.csproj", "{03046A16-EDD6-4281-9B7B-8641EF160733}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceUnitTests", "EComUnitTests\ECommerceUnitTests.csproj", "{62520E46-AB69-41B5-B7EC-13EE77D14AC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceUnitTests", "ECommerceUnitTests\ECommerceUnitTests.csproj", "{62520E46-AB69-41B5-B7EC-13EE77D14AC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
