@@ -1,5 +1,5 @@
-﻿using ECommerce.ParameterObjects;
-using ECommerceApi;
+﻿using ECommerceApi;
+using ECommerceApi.Inputs;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ECommerceUnitTests.EComApiTests
+namespace ECommerceApiTests
 {
     public class OrderTests
     {
@@ -36,7 +36,7 @@ namespace ECommerceUnitTests.EComApiTests
         [InlineData("/order/create-order", "P3", 0, HttpStatusCode.BadRequest)]
         public async Task Return_Bad_Request_Without_ProductCode_Or_Quantity(string url, string productCode, double quantity, HttpStatusCode expectedStatusCode)
         {
-            var request = new OrderParam
+            var request = new OrderInput
             {
                 ProductCode = productCode,
                 Quantity = quantity
@@ -53,7 +53,7 @@ namespace ECommerceUnitTests.EComApiTests
         [InlineData("/order/create-order", "P3", 15, HttpStatusCode.OK, "Product not found P3")]
         public async Task Return_OK_Product_Not_Found(string url, string productCode, double quantity, HttpStatusCode expectedStatusCode, string expectedResult)
         {
-            var request = new OrderParam
+            var request = new OrderInput
             {
                 ProductCode = productCode,
                 Quantity = quantity
@@ -74,7 +74,7 @@ namespace ECommerceUnitTests.EComApiTests
         [InlineData("/order/create-order", "P3", 100, HttpStatusCode.OK, "Product saleable stock is")]
         public async Task Return_OK_Product_Stock_Is_Not_Enough(string url, string productCode, double quantity, HttpStatusCode expectedStatusCode, string expectedResult)
         {
-            var request = new OrderParam
+            var request = new OrderInput
             {
                 ProductCode = productCode,
                 Quantity = quantity

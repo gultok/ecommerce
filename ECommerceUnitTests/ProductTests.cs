@@ -1,5 +1,5 @@
-﻿using ECommerce.ParameterObjects;
-using ECommerceApi;
+﻿using ECommerceApi;
+using ECommerceApi.Inputs;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ECommerceUnitTests.EComApiTests
+namespace ECommerceApiTests
 {
     public class ProductTests
     {
@@ -57,7 +57,7 @@ namespace ECommerceUnitTests.EComApiTests
         [InlineData("/product/create-product", "P1", 10, 100, HttpStatusCode.OK)]
         public async Task Return_OK_When_Product_Created(string createProductUrl, string productCode, double price, double stock, HttpStatusCode expectedStatusCode)
         {
-            var request = new ProductParam
+            var request = new ProductInput
             {
                 ProductCode = productCode,
                 Price = price,
@@ -95,7 +95,7 @@ namespace ECommerceUnitTests.EComApiTests
         [InlineData("/product/create-product", null, 10, 100, HttpStatusCode.BadRequest)]
         public async Task Return_Bad_Request_Without_ProductCode(string createProductUrl, string productCode, double price, double stock, HttpStatusCode expectedStatusCode)
         {
-            var request = new ProductParam
+            var request = new ProductInput
             {
                 ProductCode = productCode,
                 Price = price,

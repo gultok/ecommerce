@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ECommerceUnitTests.EComApiTests
+namespace ECommerceApiTests
 {
     public class CampaignTests
     {
