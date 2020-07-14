@@ -7,7 +7,7 @@ namespace ECommerceCore.Managers
 {
     public class ProductManager
     {
-        public static string CreateProduct(string productCode, double price, int stock)
+        public string CreateProduct(string productCode, double price, int stock)
         {
             IProduct product = new Product(productCode, stock, price);
             var existingProduct = Pool.Products.FirstOrDefault(p => p.Code.ToLower() == productCode.ToLower());
@@ -17,7 +17,7 @@ namespace ECommerceCore.Managers
                 throw new Exception("product existing");
             return $"Product created; code {productCode}, price {price}, stock {stock}";
         }
-        public static string GetProductInfo(string productCode)
+        public string GetProductInfo(string productCode)
         {
             IProduct product = Pool.Products.FirstOrDefault(p => p.Code.ToLower() == productCode.ToLower());
             if (product != null)

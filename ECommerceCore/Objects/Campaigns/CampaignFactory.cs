@@ -7,7 +7,7 @@ namespace ECommerceCore.Objects.Campaigns
 {
     public class CampaignFactory
     {
-        public static string CreateCampaign(string campaignName, string productCode, int duration, double limit, double targetSalesCount)
+        public string CreateCampaign(string campaignName, string productCode, int duration, double limit, double targetSalesCount)
         {
             ICampaign campaign = new Campaign(campaignName, productCode, duration, limit, targetSalesCount);
             campaign.ManipulationType = ManipulationType.Increase;

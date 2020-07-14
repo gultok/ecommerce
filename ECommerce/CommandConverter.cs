@@ -5,9 +5,9 @@ using ECommerce.Commands.ProductCommands;
 
 namespace ECommerce
 {
-    public static class CommandConverter
+    public class CommandConverter
     {
-        public static ICommand GetCommand(string commandStr)
+        public ICommand GetCommand(string commandStr)
         {
             switch (commandStr)
             {
