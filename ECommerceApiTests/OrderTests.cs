@@ -83,10 +83,20 @@ namespace ECommerceApiTests
         //create product???
 
         [Theory]
-        [InlineData("/orders", "P3", 100, HttpStatusCode.BadRequest, "Product saleable stock is")]
+        [InlineData("/orders", "P40", 100, HttpStatusCode.BadRequest, "Product P40 saleable stock is")]
         public async Task Return_Bad_Request_Product_Stock_Is_Not_Enough(string url, string productCode, int quantity, HttpStatusCode expectedStatusCode, string expectedResult)
         {
             // Arrange
+            var createProductRequest = new ProductInput
+            {
+                ProductCode = productCode,
+                Price = 100,
+                Stock = 50
+            };
+            var createProductContent = new StringContent(JsonConvert.SerializeObject(createProductRequest), Encoding.UTF8, "application/json");
+            await _client.PostAsync("/products", createProductContent);
+
+
             var request = new OrderInput
             {
                 ProductCode = productCode,
@@ -109,7 +119,7 @@ namespace ECommerceApiTests
         [InlineData("/orders", "P3", "TEN", HttpStatusCode.BadRequest)]
         public async Task Return_Bad_Request_Quantity_Is_Not_Number(string url, string productCode, string quantity, HttpStatusCode expectedStatusCode)
         {
-            // Arrange
+            // Arrange           
             var request = new
             {
                 ProductCode = productCode,
