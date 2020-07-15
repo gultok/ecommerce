@@ -34,9 +34,8 @@ namespace ECommerceApi
             {
                 app.UseDeveloperExceptionPage();
             }
-            
-            app.ConfigureCustomExceptionMiddleware();
 
+            app.ConfigureCustomExceptionMiddleware();
             app.UseHttpsRedirection();
 
             app.UseRouting();
