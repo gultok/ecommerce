@@ -1,5 +1,4 @@
-﻿using ECommerceCore;
-using ECommerceCore.Managers;
+﻿using ECommerce.Core.Managers;
 using Microsoft.VisualBasic;
 using Xunit;
 
