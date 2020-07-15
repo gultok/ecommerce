@@ -9,6 +9,7 @@ namespace ECommerceCore.Managers
     {
         public string CreateProduct(string productCode, double price, int stock)
         {
+            CreateProductValidate(productCode, price, stock);
             IProduct product = new Product(productCode, stock, price);
             var existingProduct = Pool.Products.FirstOrDefault(p => p.Code.ToLower() == productCode.ToLower());
             if (existingProduct == null)
@@ -19,6 +20,7 @@ namespace ECommerceCore.Managers
         }
         public string GetProductInfo(string productCode)
         {
+            GetProductInfoValidate(productCode);
             IProduct product = Pool.Products.FirstOrDefault(p => p.Code.ToLower() == productCode.ToLower());
             if (product != null)
             {
@@ -37,6 +39,22 @@ namespace ECommerceCore.Managers
                 return product.GetProductInfo();
             }
             throw new ECommerceException($"Product not found: {productCode}", (int)HttpStatusCode.NotFound);
+        }
+        private void CreateProductValidate(string productCode, double price, int stock)
+        {
+            if (string.IsNullOrWhiteSpace(productCode))
+                throw new ECommerceException("Product code can not be null or empty", (int)HttpStatusCode.BadRequest);
+            if (productCode.Length < 2)
+                throw new ECommerceException("Product code length must greater than 2", (int)HttpStatusCode.BadRequest);
+            if (price <= 0)
+                throw new ECommerceException("Product price must be greater than 0", (int)HttpStatusCode.BadRequest);
+            if (stock <= 0)
+                throw new ECommerceException("Product stock must be greater than 0", (int)HttpStatusCode.BadRequest);
+        }
+        private void GetProductInfoValidate(string productCode)
+        {
+            if (string.IsNullOrWhiteSpace(productCode))
+                throw new ECommerceException("Product code can not be null or empty", (int)HttpStatusCode.BadRequest);
         }
     }
 }

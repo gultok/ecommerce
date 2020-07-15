@@ -24,7 +24,7 @@ namespace ECommerceCore
         public TimeSpan EndTime { get; set; }
         public double Limit { get; set; }
         public double TargetSalesCount { get; set; }
-        public decimal AverageItemPrice { get; set; }
+        public double AverageItemPrice { get; set; }
         public string CampaignName { get; set; }
         public ManipulationType ManipulationType { get; set; }
         public double ManipulationValue { get; set; }

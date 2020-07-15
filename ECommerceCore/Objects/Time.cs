@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace ECommerceCore
 {
@@ -7,6 +8,7 @@ namespace ECommerceCore
         public static TimeSpan CurrentTime = new TimeSpan(0, 0, 0);
         public static string IncreaseTime(int hours)
         {
+            IncreaseTimeValidate(hours);
             CurrentTime = new TimeSpan(CurrentTime.Hours + hours, 0, 0);
             return $"Time is {CurrentTime}";
         }
@@ -15,6 +17,10 @@ namespace ECommerceCore
             CurrentTime = new TimeSpan(0, 0, 0);
             return $"Time is {CurrentTime}";
         }
-        // aynı anda birden fazla kez çağrılırsa zaman üst üste arttırılmış olcak, kontrol nasıl?
+        private static void IncreaseTimeValidate(int hours)
+        {
+            if (hours <= 0)
+                throw new ECommerceException("Hours must be greater than zero.", (int)HttpStatusCode.BadRequest);
+        }
     }
 }

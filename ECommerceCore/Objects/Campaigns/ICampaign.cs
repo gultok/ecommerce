@@ -6,7 +6,7 @@ namespace ECommerceCore
     public interface ICampaign
     {
         Guid Id { get; set; }
-        decimal AverageItemPrice { get; set; }
+        double AverageItemPrice { get; set; }
         string CampaignName { get; set; }
         ManipulationType ManipulationType { get; set; }
         double ManipulationValue { get; set; }
