@@ -1,5 +1,4 @@
-﻿using ECommerceCore;
-using Xunit;
+﻿using Xunit;
 
 namespace ECommerce.Core.Tests.TimeTests
 {
