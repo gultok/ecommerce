@@ -65,7 +65,7 @@ namespace ECommerceApiTests
         }
 
         [Theory]
-        [InlineData("/products", "P1", 10, 100, HttpStatusCode.OK)]
+        [InlineData("/products", "P2", 10, 100, HttpStatusCode.OK)]
         public async Task Return_OK_When_Product_Created(string createProductUrl, string productCode, double price, int stock, HttpStatusCode expectedStatusCode)
         {
             var expectedResult = $"Product created; code {productCode}, price {price}, stock {stock}";
@@ -95,6 +95,17 @@ namespace ECommerceApiTests
         public async Task Return_OK_And_Get_Product_Info(string url, string productCode, HttpStatusCode expectedStatusCode)
         {
             var expectedResult = $"Product {productCode} info;";
+            // Arrange
+            #region CreateProduct
+            var createProductRequest = new ProductInput
+            {
+                ProductCode = productCode,
+                Stock = 50,
+                Price = 100
+            };
+            var createProductContent = new StringContent(JsonConvert.SerializeObject(createProductRequest), Encoding.UTF8, "application/json");
+            await _client.PostAsync("/products", createProductContent);
+            #endregion
 
             // Act
             var response = await _client.GetAsync($"{url}/{productCode}");

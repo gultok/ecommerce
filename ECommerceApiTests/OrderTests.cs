@@ -28,7 +28,7 @@ namespace ECommerceApiTests
         {
             // Act
             var response = await _client.PostAsync(url, null);
-            
+
             var actualStatusCode = response.StatusCode;
 
             // Assert
@@ -50,7 +50,7 @@ namespace ECommerceApiTests
 
             // Act
             var response = await _client.PostAsync(url, content);
-            
+
             var actualStatusCode = response.StatusCode;
 
             // Assert
@@ -58,7 +58,7 @@ namespace ECommerceApiTests
         }
 
         [Theory]
-        [InlineData("/orders", "P3", 15, HttpStatusCode.NotFound, "Product not found P3")]
+        [InlineData("/orders", "P4", 15, HttpStatusCode.NotFound, "Product not found P4")]
         public async Task Return_Not_Found_Product(string url, string productCode, int quantity, HttpStatusCode expectedStatusCode, string expectedResult)
         {
             // Arrange
@@ -71,7 +71,7 @@ namespace ECommerceApiTests
 
             // Act
             var response = await _client.PostAsync(url, content);
-            
+
             var actualStatusCode = response.StatusCode;
             var actualResponse = await response.Content.ReadAsStringAsync();
 
@@ -80,13 +80,23 @@ namespace ECommerceApiTests
             Assert.Equal(expectedResult, actualResponse);
         }
 
-        //create product???
-
         [Theory]
-        [InlineData("/orders", "P3", 100, HttpStatusCode.BadRequest, "Product saleable stock is")]
+        [InlineData("/orders", "P3", 100, HttpStatusCode.BadRequest, "Product P3 saleable stock is")]
         public async Task Return_Bad_Request_Product_Stock_Is_Not_Enough(string url, string productCode, int quantity, HttpStatusCode expectedStatusCode, string expectedResult)
         {
             // Arrange
+            #region CreateProduct
+            var createProductRequest = new ProductInput
+            {
+                ProductCode = productCode,
+                Stock = 50,
+                Price = 100
+            };
+            var createProductContent = new StringContent(JsonConvert.SerializeObject(createProductRequest), Encoding.UTF8, "application/json");
+            await _client.PostAsync("/products", createProductContent);
+
+            #endregion
+
             var request = new OrderInput
             {
                 ProductCode = productCode,
@@ -96,7 +106,7 @@ namespace ECommerceApiTests
 
             // Act
             var response = await _client.PostAsync(url, content);
-            
+
             var actualStatusCode = response.StatusCode;
             var actualResponse = await response.Content.ReadAsStringAsync();
 
@@ -119,7 +129,7 @@ namespace ECommerceApiTests
 
             // Act
             var response = await _client.PostAsync(url, content);
-            
+
             var actualStatusCode = response.StatusCode;
 
             // Assert
