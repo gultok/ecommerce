@@ -1,5 +1,6 @@
 ﻿using ECommerceCore.Objects.Campaigns;
 using System.Linq;
+using System.Net;
 
 namespace ECommerceCore.Managers
 {
@@ -9,6 +10,10 @@ namespace ECommerceCore.Managers
         {
             var resultMessage = "";
             // campaign type checker 
+            var existingCampaign = Pool.Campaigns.FirstOrDefault(p => p.CampaignName.ToLower() == campaignName.ToLower());
+            if (existingCampaign != null)
+                throw new ECommerceException($"Campaign has already exist {campaignName}", (int)HttpStatusCode.BadRequest);
+
             if (productCode != null && duration != 0 && limit != 0 && targetSalesCount != 0)
             {
                 resultMessage = new CampaignFactory().CreateCampaign(campaignName, productCode, duration, limit, targetSalesCount);
@@ -27,7 +32,7 @@ namespace ECommerceCore.Managers
             {
                 return campaign.GetCampaignInfo();
             }
-            return $"Campaign not found: {campaignName}";
+            throw new ECommerceException($"Campaign not found: {campaignName}", (int)HttpStatusCode.NotFound);
         }
     }
 }

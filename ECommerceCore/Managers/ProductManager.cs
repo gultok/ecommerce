@@ -1,7 +1,7 @@
 ﻿using ECommerceCore.Enums;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace ECommerceCore.Managers
 {
@@ -14,7 +14,7 @@ namespace ECommerceCore.Managers
             if (existingProduct == null)
                 Pool.Products.Add(product);
             else
-                throw new Exception("product existing");
+                throw new ECommerceException($"Product has already exist {productCode}", (int)HttpStatusCode.BadRequest);
             return $"Product created; code {productCode}, price {price}, stock {stock}";
         }
         public string GetProductInfo(string productCode)
@@ -36,8 +36,7 @@ namespace ECommerceCore.Managers
                 }
                 return product.GetProductInfo();
             }
-            else
-                return $"Product not found: {productCode}";
+            throw new ECommerceException($"Product not found: {productCode}", (int)HttpStatusCode.NotFound);
         }
     }
 }

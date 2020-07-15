@@ -17,10 +17,11 @@ namespace ECommerce.Commands.CommonCommands
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.PostAsync(Global.ActionUrl($"/time/increase-time/{hours}"), null).Result;
             string resultMessage = "";
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                resultMessage = response.Content.ReadAsStringAsync().Result;
+                // add log
             }
+            resultMessage = response.Content.ReadAsStringAsync().Result;
             Console.WriteLine(resultMessage);
         }
 

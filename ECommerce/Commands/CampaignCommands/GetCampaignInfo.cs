@@ -17,10 +17,11 @@ namespace ECommerce.Commands
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/campaigns/{name}")).Result;
             string resultMessage = "";
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                resultMessage = response.Content.ReadAsStringAsync().Result;
+                // add log
             }
+            resultMessage = response.Content.ReadAsStringAsync().Result;
             Console.WriteLine(resultMessage);
         }
 

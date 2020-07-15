@@ -18,10 +18,11 @@ namespace ECommerce.Commands.ProductCommands
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/products/{productCode}")).Result;
             string resultMessage = "";
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                resultMessage = response.Content.ReadAsStringAsync().Result;
+                // add log
             }
+            resultMessage = response.Content.ReadAsStringAsync().Result;
             Console.WriteLine(resultMessage);
         }
 

@@ -23,10 +23,11 @@ namespace ECommerce.Commands.OrderCommands
                 Quantity = quantity
             }).Result;
             string resultMessage = "";
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                resultMessage = response.Content.ReadAsStringAsync().Result;
+                // add log
             }
+            resultMessage = response.Content.ReadAsStringAsync().Result;
             Console.WriteLine(resultMessage);
         }
 
