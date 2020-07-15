@@ -2,7 +2,7 @@
 {
     public interface IPriceManipulationLimitCampaign : ICampaign
     {
-        public double Limit { get; set; }
-        public bool CheckPriceManipulationLimit();
+        double Limit { get; set; }
+        bool CheckPriceManipulationLimit();
     }
 }

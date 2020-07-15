@@ -7,18 +7,18 @@ namespace ECommerce.Commands
 {
     public class CreateCampaign : ICommand
     {
-        public string _commandStr { get; set; }
+        public string CommandStr { get; set; }
         public CreateCampaign(string commandStr)
         {
-            _commandStr = commandStr;
+            CommandStr = commandStr;
         }
         public void Run()
         {
-            var name = _commandStr.Split(' ')[1];
-            var productCode = _commandStr.Split(' ')[2];
-            var duration = Convert.ToInt32(_commandStr.Split(' ')[3]);
-            var limit = Convert.ToDouble(_commandStr.Split(' ')[4]);
-            var targetSalesCount = Convert.ToInt32(_commandStr.Split(' ')[5]);
+            var name = CommandStr.Split(' ')[1];
+            var productCode = CommandStr.Split(' ')[2];
+            var duration = Convert.ToInt32(CommandStr.Split(' ')[3]);
+            var limit = Convert.ToDouble(CommandStr.Split(' ')[4]);
+            var targetSalesCount = Convert.ToInt32(CommandStr.Split(' ')[5]);
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/campaigns"), new CampaignParam
             {
@@ -39,10 +39,10 @@ namespace ECommerce.Commands
 
         public void Validate()
         {
-            if (string.IsNullOrEmpty(_commandStr) || string.IsNullOrWhiteSpace(_commandStr))
+            if (string.IsNullOrEmpty(CommandStr) || string.IsNullOrWhiteSpace(CommandStr))
                 throw new Exception("Command should not be null, space or empty");
 
-            string[] commandAry = _commandStr.Split(' ');
+            string[] commandAry = CommandStr.Split(' ');
 
             //5 parameter verifies???
             if (commandAry.Count() > 3)

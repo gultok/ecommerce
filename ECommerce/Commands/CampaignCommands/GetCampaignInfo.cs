@@ -6,14 +6,14 @@ namespace ECommerce.Commands
 {
     public class GetCampaignInfo : ICommand
     {
-        public string _commandStr { get; set; }
+        public string CommandStr { get; set; }
         public GetCampaignInfo(string commandStr)
         {
-            _commandStr = commandStr;
+            CommandStr = commandStr;
         }
         public void Run()
         {
-            var name = _commandStr.Split(' ')[1];
+            var name = CommandStr.Split(' ')[1];
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/campaigns/{name}")).Result;
             string resultMessage = "";
@@ -27,10 +27,10 @@ namespace ECommerce.Commands
 
         public void Validate()
         {
-            if (string.IsNullOrEmpty(_commandStr) || string.IsNullOrWhiteSpace(_commandStr))
+            if (string.IsNullOrEmpty(CommandStr) || string.IsNullOrWhiteSpace(CommandStr))
                 throw new Exception("Command should not be null, space or empty");
 
-            string[] commandAry = _commandStr.Split(' ');
+            string[] commandAry = CommandStr.Split(' ');
 
             /*it verifies command has least 1 parameter 
             but it is not sufficient becasue command may not has parameter*/

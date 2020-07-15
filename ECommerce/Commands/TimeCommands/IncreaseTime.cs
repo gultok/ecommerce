@@ -6,14 +6,14 @@ namespace ECommerce.Commands.CommonCommands
 {
     public class IncreaseTime : ICommand
     {
-        public string _commandStr { get; set; }
+        public string CommandStr { get; set; }
         public IncreaseTime(string commandStr)
         {
-            _commandStr = commandStr;
+            CommandStr = commandStr;
         }
         public void Run()
         {
-            int hours = Convert.ToInt16(_commandStr.Split(' ')[1]);
+            int hours = Convert.ToInt16(CommandStr.Split(' ')[1]);
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.PostAsync(Global.ActionUrl($"/time/increase-time/{hours}"), null).Result;
             string resultMessage = "";
@@ -27,10 +27,10 @@ namespace ECommerce.Commands.CommonCommands
 
         public void Validate()
         {
-            if (string.IsNullOrEmpty(_commandStr) || string.IsNullOrWhiteSpace(_commandStr))
+            if (string.IsNullOrEmpty(CommandStr) || string.IsNullOrWhiteSpace(CommandStr))
                 throw new Exception("Command should not be null, space or empty");
 
-            string[] commandAry = _commandStr.Split(' ');
+            string[] commandAry = CommandStr.Split(' ');
             /*it verifies command has least 1 parameter 
             but it is not sufficient becasue command may not has parameter*/
             if (commandAry.Count() < 2)

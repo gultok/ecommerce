@@ -2,7 +2,7 @@
 {
     public interface ICommand
     {
-        string _commandStr { get; set; }
+        string CommandStr { get; set; }
         void Validate();
         void Run();
     }

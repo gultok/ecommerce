@@ -20,8 +20,8 @@ namespace ECommerceApiTests
         }
 
         [Theory]
-        [InlineData("/campaign/get-campaign-info", HttpStatusCode.NotFound)]
-        public async Task Return_Not_Found_Error_Without_CampaignName(string url, HttpStatusCode expectedStatusCode)
+        [InlineData("/campaigns", HttpStatusCode.MethodNotAllowed)]
+        public async Task Return_Method_Not_Allowed_Without_CampaignName(string url, HttpStatusCode expectedStatusCode)
         {
             // Act
             var response = await _client.GetAsync(url);
@@ -33,8 +33,8 @@ namespace ECommerceApiTests
         }
 
         [Theory]
-        [InlineData("/campaign/get-campaign-info", "C1", HttpStatusCode.OK, "Campaign not found: C1")]
-        public async Task Return_OK_And_Not_Found_Campaign(string url, string campaignName, HttpStatusCode expectedStatusCode, string expectedResult)
+        [InlineData("/campaigns", "C1", HttpStatusCode.NotFound, "Campaign not found: C1")]
+        public async Task Return_Not_Found_Campaign(string url, string campaignName, HttpStatusCode expectedStatusCode, string expectedResult)
         {
             // Act
             var response = await _client.GetAsync($"{url}/{campaignName}");
