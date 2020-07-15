@@ -27,7 +27,7 @@ namespace ECommerceApi.CustomExceptionMiddleware
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             var managedException = exception as ECommerceException;
             context.Response.ContentType = "application/json";
@@ -35,12 +35,12 @@ namespace ECommerceApi.CustomExceptionMiddleware
             if(managedException == null)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                return context.Response.WriteAsync("Bilinmeyen bir hata oluştu");
+                await context.Response.WriteAsync("Bilinmeyen bir hata oluştu");
             }
             else
             {
                 context.Response.StatusCode = managedException.StatusCode;
-                return context.Response.WriteAsync(managedException.Message);
+                await context.Response.WriteAsync(managedException.Message);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using ECommerceCore;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ECommerceApi.Controllers
 {
@@ -8,16 +9,16 @@ namespace ECommerceApi.Controllers
     public class TimeController : ControllerBase
     {
         [HttpPost("/time/increase-time/{hours}")]
-        public IActionResult IncreaseTime(int hours)
+        public async Task<IActionResult> IncreaseTime(int hours)
         {
             var message = Time.IncreaseTime(hours);
-            return Ok(message);
+            return await Task.FromResult(Ok(message));
         }
         [HttpPut("/time/reset-time")]
-        public IActionResult ResetTime()
+        public async Task<IActionResult> ResetTime()
         {
             var message = Time.ResetTime();
-            return Ok(message);
+            return await Task.FromResult(Ok(message));
         }
     }
 }

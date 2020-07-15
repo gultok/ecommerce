@@ -1,5 +1,6 @@
 ﻿using ECommerceCore;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ECommerceApi.Controllers
 {
@@ -8,10 +9,10 @@ namespace ECommerceApi.Controllers
     public class SystemController : ControllerBase
     {
         [HttpPut("/system/reset-data")]
-        public IActionResult ResetData()
+        public async Task<IActionResult> ResetData()
         {
             Pool.ResetPool();
-            return Ok();
+            return await Task.FromResult(Ok());
         }
     }
 }

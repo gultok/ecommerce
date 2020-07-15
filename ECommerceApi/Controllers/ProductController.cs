@@ -1,6 +1,7 @@
 ﻿using ECommerceApi.Models;
 using ECommerceCore.Managers;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ECommerceApi.Controllers
 {
@@ -9,19 +10,19 @@ namespace ECommerceApi.Controllers
     public class ProductController : ControllerBase
     {
         [HttpPost("/products")]
-        public IActionResult CreateProduct([FromBody] ProductInput product)
+        public async Task<IActionResult> CreateProduct([FromBody] ProductInput product)
         {
             //product validation
             if (string.IsNullOrEmpty(product.ProductCode) || string.IsNullOrWhiteSpace(product.ProductCode))
                 return BadRequest("product code can not be null");
             var message = new ProductManager().CreateProduct(product.ProductCode, product.Price, product.Stock);
-            return Ok(message);
+            return await Task.FromResult(Ok(message));
         }
         [HttpGet("/products/{productCode}")]
-        public IActionResult GetProductInfo(string productCode)
+        public async Task<IActionResult> GetProductInfo(string productCode)
         {
             var message = new ProductManager().GetProductInfo(productCode);
-            return Ok(message);
+            return await Task.FromResult(Ok(message));
         }
     }
 }
