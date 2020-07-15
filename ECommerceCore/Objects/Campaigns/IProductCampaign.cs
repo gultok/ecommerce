@@ -2,7 +2,7 @@
 {
     public interface IProductCampaign : ICampaign
     {
-        public string ProductCode { get; set; }
-        public bool CheckProduct(string productCode);
+        string ProductCode { get; set; }
+        bool CheckProduct(string productCode);
     }
 }

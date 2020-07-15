@@ -23,7 +23,7 @@ namespace ECommerceApiTests
         }
 
         [Theory]
-        [InlineData("/order/create-order", HttpStatusCode.UnsupportedMediaType)]
+        [InlineData("/orders", HttpStatusCode.UnsupportedMediaType)]
         public async Task Return_Unsupported_Media_Type_Without_Order_Info(string url, HttpStatusCode expectedStatusCode)
         {
             // Act
@@ -36,8 +36,8 @@ namespace ECommerceApiTests
         }
 
         [Theory]
-        [InlineData("/order/create-order", null, 10, HttpStatusCode.BadRequest)]
-        [InlineData("/order/create-order", "P3", 0, HttpStatusCode.BadRequest)]
+        [InlineData("/orders", null, 10, HttpStatusCode.BadRequest)]
+        [InlineData("/orders", "P3", 0, HttpStatusCode.BadRequest)]
         public async Task Return_Bad_Request_Without_ProductCode_Or_Quantity(string url, string productCode, int quantity, HttpStatusCode expectedStatusCode)
         {
             // Arrange
@@ -58,8 +58,8 @@ namespace ECommerceApiTests
         }
 
         [Theory]
-        [InlineData("/order/create-order", "P3", 15, HttpStatusCode.OK, "Product not found P3")]
-        public async Task Return_OK_Product_Not_Found(string url, string productCode, int quantity, HttpStatusCode expectedStatusCode, string expectedResult)
+        [InlineData("/orders", "P3", 15, HttpStatusCode.NotFound, "Product not found P3")]
+        public async Task Return_Not_Found_Product(string url, string productCode, int quantity, HttpStatusCode expectedStatusCode, string expectedResult)
         {
             // Arrange
             var request = new OrderInput
@@ -83,8 +83,8 @@ namespace ECommerceApiTests
         //create product???
 
         [Theory]
-        [InlineData("/order/create-order", "P3", 100, HttpStatusCode.OK, "Product saleable stock is")]
-        public async Task Return_OK_Product_Stock_Is_Not_Enough(string url, string productCode, int quantity, HttpStatusCode expectedStatusCode, string expectedResult)
+        [InlineData("/orders", "P3", 100, HttpStatusCode.BadRequest, "Product saleable stock is")]
+        public async Task Return_Bad_Request_Product_Stock_Is_Not_Enough(string url, string productCode, int quantity, HttpStatusCode expectedStatusCode, string expectedResult)
         {
             // Arrange
             var request = new OrderInput
@@ -106,7 +106,7 @@ namespace ECommerceApiTests
         }
 
         [Theory]
-        [InlineData("/order/create-order", "P3", "TEN", HttpStatusCode.BadRequest)]
+        [InlineData("/orders", "P3", "TEN", HttpStatusCode.BadRequest)]
         public async Task Return_Bad_Request_Quantity_Is_Not_Number(string url, string productCode, string quantity, HttpStatusCode expectedStatusCode)
         {
             // Arrange

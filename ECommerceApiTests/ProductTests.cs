@@ -23,8 +23,8 @@ namespace ECommerceApiTests
         }
 
         [Theory]
-        [InlineData("/product/get-product-info", HttpStatusCode.NotFound)]
-        public async Task Return_Not_Found_Error_Without_Product_Code(string url, HttpStatusCode expectedStatusCode)
+        [InlineData("/products", HttpStatusCode.MethodNotAllowed)]
+        public async Task Return_Method_Not_Allowed_Error_Without_Product_Code(string url, HttpStatusCode expectedStatusCode)
         {
             // Act
             var response = await _client.GetAsync(url);
@@ -35,8 +35,8 @@ namespace ECommerceApiTests
         }
 
         [Theory]
-        [InlineData("/product/get-product-info", "P1", HttpStatusCode.OK)]
-        public async Task Return_OK_And_Not_Found_Product(string url, string productCode, HttpStatusCode expectedStatusCode)
+        [InlineData("/products", "P1", HttpStatusCode.NotFound)]
+        public async Task Return_Not_Found_Product(string url, string productCode, HttpStatusCode expectedStatusCode)
         {
             var expectedResult = $"Product not found: {productCode}";
 
@@ -52,7 +52,7 @@ namespace ECommerceApiTests
         }
 
         [Theory]
-        [InlineData("/product/create-product", HttpStatusCode.UnsupportedMediaType)]
+        [InlineData("/products", HttpStatusCode.UnsupportedMediaType)]
         public async Task Return_Unsupported_Media_Type_Without_Product_Info(string url, HttpStatusCode expectedStatusCode)
         {
             // Act
@@ -65,7 +65,7 @@ namespace ECommerceApiTests
         }
 
         [Theory]
-        [InlineData("/product/create-product", "P1", 10, 100, HttpStatusCode.OK)]
+        [InlineData("/products", "P1", 10, 100, HttpStatusCode.OK)]
         public async Task Return_OK_When_Product_Created(string createProductUrl, string productCode, double price, int stock, HttpStatusCode expectedStatusCode)
         {
             var expectedResult = $"Product created; code {productCode}, price {price}, stock {stock}";
@@ -91,7 +91,7 @@ namespace ECommerceApiTests
         }
 
         [Theory]
-        [InlineData("/product/get-product-info", "P1", HttpStatusCode.OK)]
+        [InlineData("/products", "P1", HttpStatusCode.OK)]
         public async Task Return_OK_And_Get_Product_Info(string url, string productCode, HttpStatusCode expectedStatusCode)
         {
             var expectedResult = $"Product {productCode} info;";
@@ -108,7 +108,7 @@ namespace ECommerceApiTests
         }
 
         [Theory]
-        [InlineData("/product/create-product", null, 10, 100, HttpStatusCode.BadRequest)]
+        [InlineData("/products", null, 10, 100, HttpStatusCode.BadRequest)]
         public async Task Return_Bad_Request_Without_ProductCode(string createProductUrl, string productCode, double price, int stock, HttpStatusCode expectedStatusCode)
         {
             // Arrange

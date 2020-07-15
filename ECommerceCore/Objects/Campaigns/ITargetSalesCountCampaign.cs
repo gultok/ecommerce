@@ -2,7 +2,7 @@
 {
     public interface ITargetSalesCountCampaign : ICampaign
     {
-        public double TargetSalesCount { get; set; }
-        public bool CheckTargetSalesCount();
+        double TargetSalesCount { get; set; }
+        bool CheckTargetSalesCount();
     }
 }

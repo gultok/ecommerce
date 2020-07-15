@@ -7,15 +7,15 @@ namespace ECommerce.Commands.OrderCommands
 {
     public class CreateOrder : ICommand
     {
-        public string _commandStr { get; set; }
+        public string CommandStr { get; set; }
         public CreateOrder(string commandStr)
         {
-            _commandStr = commandStr;
+            CommandStr = commandStr;
         }
         public void Run()
         {
-            var productCode = _commandStr.Split(' ')[1];
-            var quantity = Convert.ToInt32(_commandStr.Split(' ')[2]);
+            var productCode = CommandStr.Split(' ')[1];
+            var quantity = Convert.ToInt32(CommandStr.Split(' ')[2]);
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.PostAsJsonAsync(Global.ActionUrl($"/orders"), new OrderParam
             {
@@ -33,10 +33,10 @@ namespace ECommerce.Commands.OrderCommands
 
         public void Validate()
         {
-            if (string.IsNullOrEmpty(_commandStr) || string.IsNullOrWhiteSpace(_commandStr))
+            if (string.IsNullOrEmpty(CommandStr) || string.IsNullOrWhiteSpace(CommandStr))
                 throw new Exception("Command should not be null, space or empty");
 
-            string[] commandAry = _commandStr.Split(' ');
+            string[] commandAry = CommandStr.Split(' ');
 
             /*it verifies command has least 1 parameter 
             but it is not sufficient becasue command may not has parameter*/
