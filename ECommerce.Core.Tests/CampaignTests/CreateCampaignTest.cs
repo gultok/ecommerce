@@ -7,7 +7,7 @@ namespace ECommerce.Core.Tests.CampaignTests
     public class CreateCampaignTest
     {
         [Theory]
-        [InlineData("C2", "P11", 3, 10, 100, "Campaign created; name C2, product P11, duration 3,limit 10, target sales count 100")]
+        [InlineData("C2", "P101", 3, 10, 100, "Campaign created; name C2, product P101, duration 3,limit 10, target sales count 100")]
         public void Create_Campaign_Success(string campaignName, string productCode, int duration, double limit, double targetSalesCount, string expectedMessage)
         {
             // Act

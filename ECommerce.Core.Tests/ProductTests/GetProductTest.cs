@@ -11,6 +11,8 @@ namespace ECommerce.Core.Tests.ProductTests
         public void Get_Product_Info_Success(string productCode, string expectedMessage)
         {
             // Arrange 
+            Time.ResetTime();
+            Pool.ResetPool();
             IProduct product = new Product(productCode, 50, 100);
             Pool.Products.Add(product);
 
@@ -25,6 +27,8 @@ namespace ECommerce.Core.Tests.ProductTests
         public void Get_Product_Info_Success_With_Campaign_Price(string productCode, string expectedMessage)
         {
             // Arrange 
+            Time.ResetTime();
+            Pool.ResetPool();
             IProduct product = new Product(productCode, 50, 100);
             Pool.Products.Add(product);
 
