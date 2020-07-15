@@ -11,6 +11,8 @@ namespace ECommerceApi.Controllers
         [HttpPost("/time/increase-time/{hours}")]
         public async Task<IActionResult> IncreaseTime(int hours)
         {
+            if (hours <= 0)
+                return await Task.FromResult(BadRequest("Hours must be greater than zero"));
             var message = Time.IncreaseTime(hours);
             return await Task.FromResult(Ok(message));
         }
