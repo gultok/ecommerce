@@ -1,6 +1,7 @@
 ﻿using ECommerceApi.Models;
 using ECommerceCore.Managers;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ECommerceApi.Controllers
 {
@@ -9,16 +10,16 @@ namespace ECommerceApi.Controllers
     public class CampaignController : ControllerBase
     {
         [HttpPost("/campaigns")]
-        public IActionResult CreateCampaign([FromBody] CampaignInput campaign)
+        public async Task<IActionResult> CreateCampaign([FromBody] CampaignInput campaign)
         {
             var message = new CampaignManager().CreateCampaign(campaign.Name, campaign.ProductCode, campaign.Duration, campaign.Limit, campaign.TargetSalesCount);
-            return Ok(message);
+            return await Task.FromResult(await Task.FromResult(Ok(message)));
         }
         [HttpGet("/campaigns/{campaignName}")]
-        public IActionResult GetCampaignInfo(string campaignName)
+        public async Task<IActionResult> GetCampaignInfo(string campaignName)
         {
             var message = new CampaignManager().GetCampaignInfo(campaignName);
-            return Ok(message);
+            return await Task.FromResult(Ok(message));
         }
     }
 }

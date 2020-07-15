@@ -40,7 +40,7 @@ namespace ECommerceApiTests
             var response = await _client.GetAsync($"{url}/{campaignName}");
             
             var actualStatusCode = response.StatusCode;
-            var actualResponse = response.Content.ReadAsStringAsync().Result;
+            var actualResponse = await response.Content.ReadAsStringAsync();
             
             // Assert
             Assert.Equal(expectedStatusCode, actualStatusCode);
