@@ -3,6 +3,7 @@ using ECommerceCore.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace ECommerceCore.Managers
 {
@@ -13,12 +14,11 @@ namespace ECommerceCore.Managers
             var product = Pool.Products.FirstOrDefault(p => p.Code.ToLower() == productCode.ToLower());
             //add validation
             if (product == null)
-                return $"Product not found {productCode}";
+                throw new ECommerceException($"Product not found {productCode}", (int)HttpStatusCode.NotFound);
             //order stock control
             if (product.Stock < quantity)
             {
-                //quantity = product.Stock.Value;
-                return $"Product saleable stock is {product.Stock}";
+                throw new ECommerceException($"Product {product.Code} saleable stock is {product.Stock}", (int)HttpStatusCode.BadRequest);
             }
 
             List<OrderItem> orderItems = new List<OrderItem>();
