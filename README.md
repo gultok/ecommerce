@@ -17,7 +17,7 @@ ECommerce solution has 2 main projects and 2 test projects.
 	Increase Time
 
 You can do that operations with 2 ways: 
-## 1) You can create text file with your commands 
+## 1) create text file with your commands 
 		"create_product PRODUCTCODE PRICE STOCK", 
 		"get_product_info PRODUCTCODE", 
 		"create_campaign NAME PRODUCTCODE DURATION LIMIT TARGETSALESCOUNT", 
@@ -27,7 +27,7 @@ You can do that operations with 2 ways:
   and add that file into ECommerce.CommandRunner project folder with name like "Scenario...".
   Before run ECommerce.CommandRunner, run ECommerce.Api project.
 
-## 2) You can run ECommerce.Api and call api endpoints.
+## 2) run ECommerce.Api and call api endpoints.
 	Get Product Info	
 		method: Get, url endpoint: /products/{productcode}
 	Create Product
