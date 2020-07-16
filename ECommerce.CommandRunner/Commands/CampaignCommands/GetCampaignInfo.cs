@@ -7,21 +7,23 @@ namespace ECommerce.CommandRunner.Commands
     public class GetCampaignInfo : ICommand
     {
         public string CommandStr { get; set; }
-        public GetCampaignInfo(string commandStr)
+        private static log4net.ILog Logger;
+
+        public GetCampaignInfo(string commandStr, log4net.ILog logger)
         {
             CommandStr = commandStr;
+            Logger = logger;
         }
         public void Run()
         {
             var name = CommandStr.Split(' ')[1];
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/campaigns/{name}")).Result;
-            string resultMessage = "";
+            string resultMessage = response.Content.ReadAsStringAsync().Result;
             if (!response.IsSuccessStatusCode)
             {
-                // add log
+                Logger.Error("Status Code: " + response.StatusCode.ToString() + ", Exception Message: " + resultMessage);
             }
-            resultMessage = response.Content.ReadAsStringAsync().Result;
             Console.WriteLine(resultMessage);
         }
 

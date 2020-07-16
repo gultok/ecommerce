@@ -6,10 +6,12 @@ namespace ECommerce.CommandRunner.Commands.ProductCommands
 {
     public class GetProductInfo : ICommand
     {
+        private static log4net.ILog Logger;
         public string CommandStr { get; set; }
-        public GetProductInfo(string commandStr)
+        public GetProductInfo(string commandStr, log4net.ILog logger)
         {
             CommandStr = commandStr;
+            Logger = logger;
         }
 
         public void Run()
@@ -17,12 +19,11 @@ namespace ECommerce.CommandRunner.Commands.ProductCommands
             var productCode = CommandStr.Split(' ')[1];
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.GetAsync(Global.ActionUrl($"/products/{productCode}")).Result;
-            string resultMessage = "";
+            string resultMessage = response.Content.ReadAsStringAsync().Result;
             if (!response.IsSuccessStatusCode)
             {
-                // add log
+                Logger.Error("Status Code: " + response.StatusCode.ToString() + ", Exception Message: " + resultMessage);
             }
-            resultMessage = response.Content.ReadAsStringAsync().Result;
             Console.WriteLine(resultMessage);
         }
 

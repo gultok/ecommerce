@@ -8,9 +8,12 @@ namespace ECommerce.CommandRunner.Commands.OrderCommands
     public class CreateOrder : ICommand
     {
         public string CommandStr { get; set; }
-        public CreateOrder(string commandStr)
+        private static log4net.ILog Logger;
+
+        public CreateOrder(string commandStr, log4net.ILog logger)
         {
             CommandStr = commandStr;
+            Logger = logger;
         }
         public void Run()
         {
@@ -22,12 +25,11 @@ namespace ECommerce.CommandRunner.Commands.OrderCommands
                 ProductCode = productCode,
                 Quantity = quantity
             }).Result;
-            string resultMessage = "";
+            string resultMessage = response.Content.ReadAsStringAsync().Result;
             if (!response.IsSuccessStatusCode)
             {
-                // add log
+                Logger.Error("Status Code: " + response.StatusCode.ToString() + ", Exception Message: " + resultMessage);
             }
-            resultMessage = response.Content.ReadAsStringAsync().Result;
             Console.WriteLine(resultMessage);
         }
 

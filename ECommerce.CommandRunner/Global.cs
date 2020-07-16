@@ -11,9 +11,9 @@ namespace ECommerce.CommandRunner
         {
             return $"{apiUrl}{actionUrl}";
         }
-        public static void ValidateAndRunCommand(string line)
+        public static void ValidateAndRunCommand(string line, log4net.ILog logger)
         {
-            ICommand command = new CommandConverter().GetCommand(line);
+            ICommand command = new CommandConverter(logger).GetCommand(line);
             if (command == null)
                 throw new Exception("Command does not found");
             command.Validate();
