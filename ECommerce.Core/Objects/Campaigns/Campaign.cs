@@ -44,7 +44,13 @@ namespace ECommerce.Core
 
         public void ApplyCampaign(IProduct product)
         {
-            var percentage = Percentage + (Time.CurrentTime - StartTime).Hours * 5;
+            double percentage = 0;
+
+            if (ManipulationType == ManipulationType.Increase)
+                percentage = Percentage + (Time.CurrentTime - StartTime).Hours * ManipulationValue;
+            else if (ManipulationType == ManipulationType.Decrease)
+                percentage = Percentage - (Time.CurrentTime - StartTime).Hours * ManipulationValue;
+
             product.CampaignPrice = product.CampaignPrice * (1 - (percentage / 100));
         }
 
@@ -60,8 +66,14 @@ namespace ECommerce.Core
 
         public bool CheckPriceManipulationLimit()
         {
-            var percentage = Percentage + (Time.CurrentTime - StartTime).Hours * 5;
-            return percentage > Limit;
+            double percentage = 0;
+
+            if (ManipulationType == ManipulationType.Increase)
+                percentage = Percentage + (Time.CurrentTime - StartTime).Hours * ManipulationValue;
+            else if (ManipulationType == ManipulationType.Decrease)
+                percentage = Percentage - (Time.CurrentTime - StartTime).Hours * ManipulationValue;
+
+            return (ManipulationType == ManipulationType.Increase && percentage > Limit) || (ManipulationType == ManipulationType.Decrease && percentage == 0);
         }
 
         public bool CheckProduct(string productCode)
