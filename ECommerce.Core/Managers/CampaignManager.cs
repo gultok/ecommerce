@@ -10,7 +10,7 @@ namespace ECommerce.Core.Managers
         {
             var resultMessage = "";
             CreateCampaignValidate(campaignName, productCode, duration, limit, targetSalesCount);
-            // campaign type checker 
+
             var existingCampaign = Pool.Campaigns.FirstOrDefault(p => p.CampaignName.ToLower() == campaignName.ToLower());
             if (existingCampaign != null)
                 throw new ECommerceException($"Campaign has already exist {campaignName}", (int)HttpStatusCode.BadRequest);
@@ -19,11 +19,7 @@ namespace ECommerce.Core.Managers
             {
                 resultMessage = new CampaignFactory().CreateCampaign(campaignName, productCode, duration, limit, targetSalesCount);
             }
-            else if (productCode != null && duration != 0 && limit != 0)
-            {
-                //Todo
-                //PDLCampaignFactory.CreateCampaign(campaignName, productCode, duration, limit);
-            }
+            // another campaigns 
             return resultMessage;
         }
         public string GetCampaignInfo(string campaignName)
