@@ -7,7 +7,9 @@ namespace ECommerce.Core
     public class Campaign : IProductDurationLimitTargetSalesCampaign
     {
         public Campaign() { }
-        public Campaign(string _campaignName, string _productCode, int _duration, double _limit, double _targetSalesCount)
+        public Campaign(string _campaignName, string _productCode,
+            int _duration, double _limit, double _targetSalesCount,
+            ManipulationType manipulationType, int manipulationValue)
         {
             Id = Guid.NewGuid();
             CampaignName = _campaignName;
@@ -17,6 +19,8 @@ namespace ECommerce.Core
             TargetSalesCount = _targetSalesCount;
             StartTime = Time.CurrentTime;
             EndTime = new TimeSpan(Time.CurrentTime.Hours + Duration, 0, 0);
+            ManipulationType = manipulationType;
+            ManipulationValue = manipulationValue;
         }
         public Guid Id { get; set; }
         public string ProductCode { get; set; }
