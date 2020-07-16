@@ -1,4 +1,5 @@
-﻿using ECommerce.Core.Managers;
+﻿using ECommerce.Core.Enums;
+using ECommerce.Core.Managers;
 using Xunit;
 
 namespace ECommerce.Core.Tests.CampaignTests
@@ -16,10 +17,10 @@ namespace ECommerce.Core.Tests.CampaignTests
             Pool.ResetPool();
             IProduct product = new Product("P11", 100, 100);
             Pool.Products.Add(product);
-            ICampaign campaign = new Campaign("C10", "P11", 5, 30, 100);
+            ICampaign campaign = new Campaign("C10", "P11", 5, 30, 100, ManipulationType.Increase, 5);
             Pool.Campaigns.Add(campaign);
 
-            ICampaign secondCampaign = new Campaign("C20", "P11", 1, 30, 100);
+            ICampaign secondCampaign = new Campaign("C20", "P11", 1, 30, 100, ManipulationType.Increase, 5);
             Pool.Campaigns.Add(secondCampaign);
 
             Time.IncreaseTime(2);

@@ -6,9 +6,7 @@ namespace ECommerce.Core.Objects.Campaigns
     {
         public string CreateCampaign(string campaignName, string productCode, int duration, double limit, double targetSalesCount)
         {
-            ICampaign campaign = new Campaign(campaignName, productCode, duration, limit, targetSalesCount);
-            campaign.ManipulationValue = 5;
-            campaign.ManipulationType = ManipulationType.Increase;
+            ICampaign campaign = new Campaign(campaignName, productCode, duration, limit, targetSalesCount, ManipulationType.Increase, 5);
             Pool.Campaigns.Add(campaign);
 
             return $"Campaign created; name {campaignName}, product {productCode}, duration {duration},limit {limit}, target sales count {targetSalesCount}";

@@ -1,4 +1,5 @@
-﻿using ECommerce.Core.Managers;
+﻿using ECommerce.Core.Enums;
+using ECommerce.Core.Managers;
 using Xunit;
 
 namespace ECommerce.Core.Tests.ProductTests
@@ -32,7 +33,7 @@ namespace ECommerce.Core.Tests.ProductTests
             IProduct product = new Product(productCode, 50, 100);
             Pool.Products.Add(product);
 
-            ICampaign campaign = new Campaign("C1", productCode, 2, 10, 100);
+            ICampaign campaign = new Campaign("C1", productCode, 2, 10, 100, ManipulationType.Increase, 5);
             Pool.Campaigns.Add(campaign);
             Time.IncreaseTime(1);
 
