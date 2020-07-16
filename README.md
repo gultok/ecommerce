@@ -2,11 +2,11 @@
 
 ECommerce solution has 2 main projects and 2 test projects. 
 
-ECommerce.CommandRunner is a console application. That application read scenario text files and run commands.
-ECommerce.Api is an API project. That api is a layer for do your operations.
-ECommerce.Core is an class project and it is business logic layer.
-ECommerce.Core.Test is a unit test project for ECommerce.Core business layer. You can test your scenarios expected results.
-ECommerce.Api.Test is an api unit test project for ECommerce.Api endpoints. You can test api endpoints with valid and invalid datas. 
+	ECommerce.CommandRunner is a console application. That application read scenario text files and run commands.
+	ECommerce.Api is an API project. That api is a layer for do your operations.
+	ECommerce.Core is an class project and it is business logic layer.
+	ECommerce.Core.Test is a unit test project for ECommerce.Core business layer. You can test your scenarios expected results.
+	ECommerce.Api.Test is an api unit test project for ECommerce.Api endpoints. You can test api endpoints with valid and invalid datas. 
 
 # You can
 	Create Product, 
