@@ -7,21 +7,23 @@ namespace ECommerce.CommandRunner.Commands.CommonCommands
     public class IncreaseTime : ICommand
     {
         public string CommandStr { get; set; }
-        public IncreaseTime(string commandStr)
+        private static log4net.ILog Logger;
+
+        public IncreaseTime(string commandStr, log4net.ILog logger)
         {
             CommandStr = commandStr;
+            Logger = logger;
         }
         public void Run()
         {
             int hours = Convert.ToInt16(CommandStr.Split(' ')[1]);
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.PostAsync(Global.ActionUrl($"/time/increase-time/{hours}"), null).Result;
-            string resultMessage = "";
+            string resultMessage = response.Content.ReadAsStringAsync().Result;
             if (!response.IsSuccessStatusCode)
             {
-                // add log
+                Logger.Error("Status Code: " + response.StatusCode.ToString() + ", Exception Message: " + resultMessage);
             }
-            resultMessage = response.Content.ReadAsStringAsync().Result;
             Console.WriteLine(resultMessage);
         }
 

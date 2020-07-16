@@ -8,9 +8,12 @@ namespace ECommerce.CommandRunner.Commands
     public class CreateCampaign : ICommand
     {
         public string CommandStr { get; set; }
-        public CreateCampaign(string commandStr)
+        private static log4net.ILog Logger;
+
+        public CreateCampaign(string commandStr, log4net.ILog logger)
         {
             CommandStr = commandStr;
+            Logger = logger;
         }
         public void Run()
         {
@@ -28,12 +31,11 @@ namespace ECommerce.CommandRunner.Commands
                 Limit = limit,
                 TargetSalesCount = targetSalesCount
             }).Result;
-            string resultMessage = "";
+            string resultMessage = response.Content.ReadAsStringAsync().Result;
             if (!response.IsSuccessStatusCode)
             {
-                // add log
+                Logger.Error("Status Code: " + response.StatusCode.ToString() + ", Exception Message: " + resultMessage);
             }
-            resultMessage = response.Content.ReadAsStringAsync().Result;
             Console.WriteLine(resultMessage);
         }
 

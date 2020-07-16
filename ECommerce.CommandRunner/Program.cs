@@ -1,9 +1,11 @@
 ﻿using System;
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "App.config")]
 
 namespace ECommerce.CommandRunner
 {
     class Program
     {
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         static void Main(string[] args)
         {
             try
@@ -15,10 +17,11 @@ namespace ECommerce.CommandRunner
                     {
                         try
                         {
-                            Global.ValidateAndRunCommand(line);
+                            Global.ValidateAndRunCommand(line, logger);
                         }
                         catch (Exception exp)
                         {
+                            logger.Error($"There was an error while scenario (\"{scenario}\") working {exp.Message}");
                             Console.WriteLine($"There was an error while scenario (\"{scenario}\") working {exp.Message}");
                         }
                     }
@@ -29,6 +32,7 @@ namespace ECommerce.CommandRunner
             }
             catch (Exception exp)
             {
+                logger.Error(exp.Message);
                 Console.WriteLine(exp.Message);
                 Console.ReadKey();
             }
