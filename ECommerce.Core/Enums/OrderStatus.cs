@@ -3,6 +3,7 @@
     public enum OrderStatus
     {
         Active,
-        Cancel
+        Cancel,
+        PartialCancel
     }
 }

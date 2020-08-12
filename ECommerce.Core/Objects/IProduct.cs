@@ -10,5 +10,6 @@ namespace ECommerce.Core
         double? Price { get; set; }
         int? Stock { get; set; }
         string GetProductInfo();
+        void UpdateStock(int quantity);
     }
 }

@@ -16,5 +16,11 @@ namespace ECommerce.Api.Controllers
             var message = new OrderManager().CreateOrder(order.ProductCode, order.Quantity);
             return await Task.FromResult(Ok(message));
         }
+        [HttpPut("/orders/{orderid}")]
+        public async Task<IActionResult> CancelOrder(string orderId)
+        {
+            var message = new OrderManager().CancelOrder(orderId);
+            return await Task.FromResult(Ok(message));
+        }
     }
 }

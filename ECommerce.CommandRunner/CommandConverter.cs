@@ -22,6 +22,8 @@ namespace ECommerce.CommandRunner
                     return new CreateProduct(commandStr, Logger);
                 case string order when order.ToLower().Contains("order") && order.ToLower().Contains("create"):
                     return new CreateOrder(commandStr, Logger);
+                case string order when order.ToLower().Contains("order") && order.ToLower().Contains("cancel"):
+                    return new CancelOrder(commandStr, Logger);
                 case string campaign when campaign.ToLower().Contains("campaign") && campaign.ToLower().Contains("get"):
                     return new GetCampaignInfo(commandStr, Logger);
                 case string campaign when campaign.ToLower().Contains("campaign") && campaign.ToLower().Contains("create"):

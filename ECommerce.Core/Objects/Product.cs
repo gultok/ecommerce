@@ -23,5 +23,10 @@ namespace ECommerce.Core
         {
             return $"Product {Code} info; price {CampaignPrice}, stock {Stock}";
         }
+
+        public void UpdateStock(int quantity)
+        {
+            Stock = quantity;
+        }
     }
 }

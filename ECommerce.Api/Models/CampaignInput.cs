@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FluentValidation;
+using System.ComponentModel.DataAnnotations;
 
 namespace ECommerce.Api.Models
 {
@@ -19,5 +20,17 @@ namespace ECommerce.Api.Models
 
         [Range(0, int.MaxValue)]
         public int TargetSalesCount { get; set; }
+    }
+    public class CampaignInputValidator: AbstractValidator<CampaignInput>
+    {
+        public CampaignInputValidator()
+        {
+            RuleFor(c => c.Name).NotNull();
+            RuleFor(c => c.Name).MinimumLength(2);
+            RuleFor(c => c.ProductCode).MinimumLength(2);
+            RuleFor(c => c.Duration).InclusiveBetween(0, int.MaxValue);
+            RuleFor(c => c.Limit).InclusiveBetween(0, double.MaxValue);
+            RuleFor(c => c.TargetSalesCount).InclusiveBetween(0, int.MaxValue);
+        }
     }
 }

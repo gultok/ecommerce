@@ -15,5 +15,9 @@ namespace ECommerce.Core
             Id = Guid.NewGuid();
             Status = OrderStatus.Active;
         }
+        public void CancelOrder()
+        {
+            Status = OrderStatus.Cancel;
+        }
     }
 }

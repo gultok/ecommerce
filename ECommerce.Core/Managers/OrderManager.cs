@@ -2,6 +2,7 @@
 using ECommerce.Core.Objects;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 
@@ -50,6 +51,30 @@ namespace ECommerce.Core.Managers
             Pool.Orders.Add(order);
             product.Stock -= quantity;
             return $"Order created; product {product.Code}, quantity {quantity}";
+        }
+        public string CancelOrder(string orderId)
+        {
+            var order = Pool.Orders.FirstOrDefault();
+            if (order == null)
+            {
+                throw new ECommerceException($"Order not found {orderId}", (int)HttpStatusCode.NotFound);
+            }
+            var updatedProducts = new Dictionary<Guid, int>();
+            foreach (var orderItem in order.OrderItems)
+            {
+                var product = Pool.Products.FirstOrDefault(x => x.Id == orderItem.ProductId);
+                if (product == null)
+                    throw new ECommerceException($"Product not found {orderItem.ProductId}", (int)HttpStatusCode.NotFound);
+
+                updatedProducts.Add(product.Id, orderItem.Quantity);
+            }
+            foreach (var product in updatedProducts)
+            {
+                var pProduct = Pool.Products.FirstOrDefault(x => x.Id == product.Key);
+                pProduct.UpdateStock(pProduct.Stock.Value + product.Value);
+            }
+            order.CancelOrder();
+            return $"Order canceled successfully {order.Id}";
         }
         private void CreateOrderValidate(string productCode, int quantity)
         {
